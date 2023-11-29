@@ -8,7 +8,7 @@ app.secret_key = 'your_secret_key'  # Replace with a real secret key
 
 @app.route('/')
 def index():
-    return 'File conversion service'
+    return render_template('Index.html')
 
 @app.route('/convert', methods=['POST'])
 def convert_file():
