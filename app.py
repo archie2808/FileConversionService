@@ -1,14 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, send_file
+from new1 import convert_txt_to_pdf
 import io
 import os
-from docx2pdf import convert
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Replace with a real secret key
+app.secret_key = 'your_secret_key'
 
 @app.route('/')
 def index():
-    return render_template('Index.html')
+    return render_template("Index.html")
 
 @app.route('/convert', methods=['POST'])
 def convert_file():
@@ -19,36 +19,33 @@ def convert_file():
 
     file = request.files['file']
 
-    # If the user does not select a file, the browser submits an empty file without a filename
+    # If user does not select file, browser submits an empty file without a filename
     if file.filename == '':
         flash('No selected file')
         return redirect(request.url)
 
-    # File conversion logic
-    if file and file.filename.endswith('.docx'):
-        # Save DOCX file temporarily
-        temp_docx = 'temp.docx'
-        file.save(temp_docx)
+    if file and file.filename.endswith('.txt'):
+        temp_txt = 'temp.txt'
+        file.save(temp_txt)
 
-        # Convert to PDF
-        temp_pdf = 'temp.pdf'
-        convert(temp_docx, temp_pdf)
+        # Convert TXT to PDF
+        return_data = io.BytesIO()
+        convert_txt_to_pdf(temp_txt, return_data)
+        return_data.seek(0)
 
-        # Read the generated PDF file
-        result = io.BytesIO()
-        with open(temp_pdf, 'rb') as pdf_file:
-            result.write(pdf_file.read())
-        result.seek(0)  # Reset the position to the start of the stream
+        # Clean up the temporary TXT file
+        os.remove(temp_txt)
 
-        # Remove the temporary files
-        os.remove(temp_docx)
-        os.remove(temp_pdf)
+        return send_file(
+            return_data,
+            mimetype='application/pdf',
+            as_attachment=True,
+            download_name='converted.pdf'
 
-        # Return the converted file
-        return send_file(result, attachment_filename = 'converted.pdf', as_attachment=True)
+        )
 
     else:
-        flash('Invalid file type. Please upload a .docx file')
+        flash('Invalid file type. Please upload a .txt file')
         return redirect(request.url)
 
 if __name__ == '__main__':
