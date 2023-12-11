@@ -3,8 +3,8 @@ from new1 import convert_txt_to_pdf
 import io
 import os
 
-app = Flask(__name__)
 
+app = Flask(__name__)
 
 @app.route('/')
 def index():
@@ -25,23 +25,17 @@ def convert_file():
         return redirect(request.url)
 
     if file and file.filename.endswith('.txt'):
-        temp_txt = 'temp.txt'
-        file.save(temp_txt)
-
-        # Convert TXT to PDF
+        # Convert TXT to PDF in memory
         return_data = io.BytesIO()
-        convert_txt_to_pdf(temp_txt, return_data)
+        input_data = file.read().decode('utf-8')
+        convert_txt_to_pdf(input_data, return_data)
         return_data.seek(0)
-
-        # Clean up the temporary TXT file
-        os.remove(temp_txt)
 
         return send_file(
             return_data,
             mimetype='application/pdf',
             as_attachment=True,
             download_name='converted.pdf'
-
         )
 
     else:

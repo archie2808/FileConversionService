@@ -1,18 +1,22 @@
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+from reportlab.pdfbase.pdfmetrics import stringWidth
+from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
 import io
 
-def convert_txt_to_pdf(txt_filename, pdf_buffer):
-    pdf = canvas.Canvas(pdf_buffer, pagesize=letter)
-    pdf.setFont("Helvetica", 10)
-    y_position = 750
+def convert_txt_to_pdf(input_data, output_stream):
+    c = canvas.Canvas(output_stream, pagesize=letter)
+    width, height = letter
+    styles = getSampleStyleSheet()
+    styleN = styles['Normal']
 
-    with open(txt_filename, 'r') as txt_file:
-        for line in txt_file:
-            pdf.drawString(72, y_position, line.strip())
-            y_position -= 12
-            if y_position < 72:
-                y_position = 750
-                pdf.showPage()
+    lines = input_data.split('\n')
 
-    pdf.save()
+    for i, line in enumerate(lines):
+        y = height - (i * 20) - 20  # Increase line spacing to 20 units
+        text = Paragraph(line.strip(), styleN)
+        text.wrapOn(c, width-20, height)
+        text.drawOn(c, 10, y)
+
+    c.save()
