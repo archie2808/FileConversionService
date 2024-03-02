@@ -4,7 +4,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     var formData = new FormData();
     formData.append('file', document.getElementById('fileInput').files[0]);
 
-    fetch('/convert', {
+    fetch('/txt_to_docx', {
         method: 'POST',
         body: formData
     })
@@ -20,4 +20,14 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
         a.remove();
     })
     .catch(error => console.error('Error:', error));
+});
+
+document.getElementById('conversionType').addEventListener('change', function() {
+    var form = document.getElementById('uploadForm');
+    var conversionType = this.value;
+    if(conversionType === 'pdf') {
+        form.action = '/convert_to_pdf';
+    } else if(conversionType === 'docx') {
+        form.action = '/convert_to_docx';
+    }
 });

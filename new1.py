@@ -3,7 +3,8 @@ from reportlab.pdfgen import canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
-import io
+import pydoc
+import docx
 
 def convert_txt_to_pdf(input_data, output_stream):
     c = canvas.Canvas(output_stream, pagesize=letter)
@@ -20,3 +21,9 @@ def convert_txt_to_pdf(input_data, output_stream):
         text.drawOn(c, 10, y)
 
     c.save()
+
+def convert_txt_to_docx(input_data):
+    doc = docx.Document()
+    for line in input_data.split('\n'):
+        doc.add_paragraph(line.strip())
+    return doc

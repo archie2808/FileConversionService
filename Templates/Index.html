@@ -10,6 +10,11 @@
     <h1>File Conversion Service</h1>
     <form id="uploadForm" enctype="multipart/form-data">
         <input type="file" name="file" id="fileInput">
+        <!-- Dropdown for selecting conversion type -->
+        <select name="conversionType" id="conversionType">
+            <option value="pdf">Convert to PDF</option>
+            <option value="docx">Convert to DOCX</option>
+        </select>
         <button type="submit">Convert File</button>
     </form>
     <button id="downloadBtn" style="display: none;">Download File</button>
