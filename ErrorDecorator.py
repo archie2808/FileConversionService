@@ -13,7 +13,7 @@ def file_Validation(f):
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
-        if not file or not file.filename.endswith('.txt' , 'pdf', 'docx' ):
+        if not file or not file.filename.endswith(('.txt', '.pdf', '.docx')):
             flash('Invalid file type.')
             return redirect(request.url)
         return f(*args, **kwargs)

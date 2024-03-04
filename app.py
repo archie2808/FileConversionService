@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, send_file
+from flask import Flask, render_template, request, redirect, url_for, flash, send_file, make_response
 from new1 import convert_txt_to_pdf, convert_txt_to_docx
 from ErrorDecorator import file_Validation
 import io
@@ -10,28 +10,27 @@ app = Flask(__name__)
 def index():
     return render_template("Index.html")
 
-@app.route('/TXT_to_Docx', methods=['POST'])
+@app.route('/txt_to_pdf', methods=['POST'])
 @file_Validation
 def convert_file():
 
     file = request.files['file']
-    if file and file.filename.endswith('.txt'):
-        # Convert TXT to PDF in memory
-        return_data = io.BytesIO()
-        input_data = file.read().decode('utf-8')
-        convert_txt_to_pdf(input_data, return_data)
-        return_data.seek(0)
 
-        return send_file(
-            return_data,
-            mimetype='application/pdf',
-            as_attachment=True,
-            download_name='converted.pdf'
+    # Convert TXT to PDF in memory
+    return_data = io.BytesIO()
+    input_data = file.read().decode('utf-8')
+    convert_txt_to_pdf(input_data, return_data)
+    return_data.seek(0)
+    original_filename = file.filename.rsplit(".", 1)[0]  # removes extension from the original file name
+    download_name = f"{original_filename}.pdf"
+    return send_file(
+        return_data,
+        mimetype='application/pdf',
+        as_attachment=True,
+        download_name=download_name
         )
 
-    else:
-        flash('Invalid file type. Please upload a .txt file')
-        return redirect(request.url)
+
 
 @app.route('/txt_to_docx', methods=['POST'])
 @file_Validation
@@ -42,12 +41,14 @@ def txt_to_docx():
     output_stream = io.BytesIO()
     doc.save(output_stream)
     output_stream.seek(0)
-    return send_file(
+    response = make_response(send_file)(
         output_stream,
         mimetype='application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         as_attachment=True,
-        download_name='converted.docx'
+        download_name=f"{file.filename}"
     )
+    response.headers["Content-Disposition"] = f"attachment; filename={file.filename}"
+    return response
 
 
 if __name__ == '__main__':
