@@ -41,14 +41,15 @@ def txt_to_docx():
     output_stream = io.BytesIO()
     doc.save(output_stream)
     output_stream.seek(0)
-    response = make_response(send_file)(
+    # Correctly call send_file and directly return its response
+    return send_file(
         output_stream,
         mimetype='application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         as_attachment=True,
         download_name=f"{file.filename}"
     )
-    response.headers["Content-Disposition"] = f"attachment; filename={file.filename}"
-    return response
+
+
 
 
 if __name__ == '__main__':

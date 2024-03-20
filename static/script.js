@@ -1,44 +1,47 @@
+// Event listener for form submission
 document.getElementById('uploadForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
     var formData = new FormData();
     formData.append('file', document.getElementById('fileInput').files[0]);
 
-fetch('/txt_to_docx', {
-    method: 'POST',
-    body: formData
-})
-.then(response => {
-    // Extract filename from Content-Disposition header
-    const contentDisp = response.headers.get('Content-Disposition');
-    let filename = 'downloaded_file';
-    if (contentDisp) {
-        filename = contentDisp.split('filename=')[1];
-        if (filename) {
-            filename = filename.replace(/['"]/g, ''); // Remove any quotes from the filename
+    // Determine the selected conversion type and set the appropriate URL
+    var conversionType = document.getElementById('conversionType').value;
+    var actionUrl = conversionType === 'pdf' ? '/txt_to_pdf' : '/txt_to_docx';
+
+    fetch(actionUrl, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-    }
-    return response.blob().then(blob => ({blob, filename}));
-})
-.then(({blob, filename}) => {
-    // Create a URL for the blob
-    var url = window.URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-})
-.catch(error => console.error('Error:', error));
+        // Extract filename from Content-Disposition header
+        const contentDisp = response.headers.get('Content-Disposition');
+        let filename = 'downloaded_file';
+        if (contentDisp) {
+            const matches = contentDisp.match(/filename="?([^"]+)"?/);
+            if (matches && matches.length > 1) {
+                filename = matches[1];
+            }
+        }
+        return response.blob().then(blob => ({blob, filename}));
+    })
+    .then(({blob, filename}) => {
+        // Create a URL for the blob and initiate download
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+    })
+    .catch(error => console.error('Error:', error));
+});
 
-
+// Event listener for change in conversion type selection
 document.getElementById('conversionType').addEventListener('change', function() {
-    var form = document.getElementById('uploadForm');
-    var conversionType = this.value;
-    if(conversionType === 'pdf') {
-        form.action = '/txt_to_pdf';
-    } else if(conversionType === 'docx') {
-        form.action = '/txt_to_docx';
-    }
-})}
+    // No need to change the form action here; it's handled during the form submission
+});
