@@ -46,7 +46,7 @@ def txt_to_docx():
         output_stream,
         mimetype='application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         as_attachment=True,
-        download_name=f"{file.filename}"
+        download_name = f"{file.filename.rsplit('.', 1)[0]}.docx"
     )
 
 
