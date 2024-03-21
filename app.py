@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, send_file, make_response
-from new1 import convert_txt_to_pdf, convert_txt_to_docx
+from conversionLogic import convert_txt_to_pdf, convert_txt_to_docx, convert_txt_to_pdf
 from ErrorDecorator import file_Validation
 import io
 
@@ -12,7 +12,7 @@ def index():
 
 @app.route('/txt_to_pdf', methods=['POST'])
 @file_Validation
-def convert_file():
+def txt_to_PDF():
 
     file = request.files['file']
 
@@ -49,7 +49,12 @@ def txt_to_docx():
         download_name = f"{file.filename.rsplit('.', 1)[0]}.docx"
     )
 
-
+@app.route('/docx_to_txt', methods=['POST'])
+@file_Validation
+def docx_to_txt():
+    file = request.files['file']
+    input_data = file.read().decode('utf-8')
+    d
 
 
 if __name__ == '__main__':
