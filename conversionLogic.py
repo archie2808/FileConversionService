@@ -16,7 +16,7 @@ def convert_txt_to_pdf(input_data, output_stream):
     - output_stream (io.BytesIO): The output stream where the PDF content will be written.
 
     Returns:
-    None: The function writes the output directly to the provided output stream.
+    None: The function writes the output directly to the provided output stream. yyy
     """
     c = canvas.Canvas(output_stream, pagesize=letter)
     width, height = letter
