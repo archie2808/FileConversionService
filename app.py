@@ -78,7 +78,7 @@ def txt_to_docx():
 
     Returns:
         A Flask response object containing the converted DOCX file, or a JSON
-        object with an error message if an exception occurs.
+        object with an error message if an exception occurs.b
     """
     try:
         file = request.files['file']
