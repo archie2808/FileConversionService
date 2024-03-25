@@ -16,7 +16,7 @@ def index():
     """
     return render_template("Index.html")
 
-@app.route('/txt_to_pdf', methods=['POST'])
+@app.route('/convert_to_pdf', methods=['POST'])
 def txt_to_PDF():
     """
     Converts a text file to PDF format and sends the converted file back to the client.
@@ -68,7 +68,7 @@ def validate_file():
     else:
         return jsonify({'message': 'File is valid'}), 200
 
-@app.route('/txt_to_docx', methods=['POST'])
+@app.route('/convert_to_docx', methods=['POST'])
 def txt_to_docx():
     """
     Converts a text file to DOCX format and sends the converted file back to the client.
@@ -97,7 +97,7 @@ def txt_to_docx():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/docx_to_txt', methods=['POST'])
+@app.route('/convert_to_txt', methods=['POST'])
 def docx_to_txt():
     """
     Converts a DOCX file to plain text format and sends the text back to the client.
