@@ -107,60 +107,40 @@ def pdf_to_txt(input_stream):
 
 def docx_to_pdf(input_stream, output_stream):
     """
-       Converts a DOCX document to a PDF file.
+    Converts a DOCX document to a PDF file using LibreOffice's command-line interface.
 
-       This function utilizes LibreOffice's command-line interface to convert
-       a DOCX document from the given BytesIO object to PDF format, writing the result
-       to another BytesIO object specified as the output stream.
+    This function takes a DOCX document from a BytesIO object, converts it to PDF format using
+    LibreOffice, and writes the result to another BytesIO object specified as the output stream.
 
-       Parameters:
-       - input_stream (io.BytesIO): A BytesIO object containing the DOCX document to be converted.
-       - output_stream (io.BytesIO): The output stream where the PDF content will be written.
+    Parameters:
+    - input_stream (io.BytesIO): The input stream containing the DOCX document to be converted.
+    - output_stream (io.BytesIO): The output stream where the converted PDF content will be written.
 
-       Requires:
-       - LibreOffice to be installed on the system where this code is run.
-
-       Raises:
-       - FileNotFoundError: If LibreOffice does not create the expected PDF file.
-
-       Note:
-       This function creates temporary files to facilitate the conversion process since
-       LibreOffice operates on file paths. These temporary files are cleaned up before the
-       function returns.
-       """
-    # Path to the LibreOffice executable
+    Raises:
+    - RuntimeError: If the conversion process fails or if the expected PDF file is not created.
+    """
     libreoffice_path = '/Applications/LibreOffice.app/Contents/MacOS/soffice'
 
     with tempfile.TemporaryDirectory() as tmpdirname:
-        # Define paths for the input DOCX and the expected output PDF
         docx_path = os.path.join(tmpdirname, "input.docx")
-
-        # Adjust the expected PDF filename to match the input filename but with .pdf extension
         pdf_path = os.path.join(tmpdirname, "input.pdf")
 
-        # Write the DOCX content to a temporary file
         with open(docx_path, 'wb') as tmp_docx:
             tmp_docx.write(input_stream.read())
 
-        # Convert DOCX to PDF using LibreOffice
-        process = subprocess.run([
-            libreoffice_path, '--headless', '--convert-to', 'pdf', '--outdir',
-            tmpdirname, docx_path
-        ], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+        try:
+            subprocess.run([libreoffice_path, '--headless', '--convert-to', 'pdf', '--outdir', tmpdirname, docx_path],
+                           check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        except subprocess.CalledProcessError as e:
+            logging.error(f"LibreOffice conversion failed: {e.stderr}")
+            raise RuntimeError("Failed to convert DOCX to PDF using LibreOffice.")
 
-        # For debugging: print or log the standard output and error
-        print("STDOUT:", process.stdout.decode())
-        print("STDERR:", process.stderr.decode())
+        if not os.path.exists(pdf_path):
+            logging.error("Expected PDF file was not created.")
+            raise FileNotFoundError("Expected PDF file was not created.")
 
-        # Ensure the PDF file exists before attempting to read it
-        if os.path.exists(pdf_path):
-            # Read the converted PDF and write it to the provided output_stream
-            with open(pdf_path, 'rb') as pdf_file:
-                output_stream.write(pdf_file.read())
-        else:
-            print(f"Expected PDF file was not created: {pdf_path}")
-            # Optionally, handle the error appropriately
-            raise FileNotFoundError(f"Expected PDF file was not created: {pdf_path}")
+        with open(pdf_path, 'rb') as pdf_file:
+            output_stream.write(pdf_file.read())
 
 
 def pdf_to_docx(input_stream, output_stream):
@@ -168,25 +148,30 @@ def pdf_to_docx(input_stream, output_stream):
     Converts a PDF file to DOCX format using the pdf2docx library.
 
     Parameters:
-    - input_stream (io.BytesIO): A BytesIO object containing the PDF document to be converted.
-    - output_stream (io.BytesIO): The output stream where the DOCX content will be written.
-    """
+    - input_stream (io.BytesIO): The input stream containing the PDF document to be converted.
+    - output_stream (io.BytesIO): The output stream where the converted DOCX content will be written.
 
-    # Create a temporary file for the input PDF as pdf2docx works with file paths
-    with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_pdf_file:
+    Raises:
+    - RuntimeError: If the conversion process fails.
+    """
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_pdf_file, \
+            tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_docx_file:
+
         temp_pdf_file.write(input_stream.read())
         input_pdf_path = temp_pdf_file.name
-
-    with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_docx_file:
         output_docx_path = temp_docx_file.name
 
-    cv = Converter(input_pdf_path)
-    cv.convert(output_docx_path)
-    cv.close()
+        try:
+            cv = Converter(input_pdf_path)
+            cv.convert(output_docx_path)
+            cv.close()
+        except Exception as e:
+            logging.error(f"PDF to DOCX conversion failed: {e}")
+            raise RuntimeError("Failed to convert PDF to DOCX.")
 
-    os.unlink(input_pdf_path)
+        with open(output_docx_path, 'rb') as docx_file:
+            output_stream.write(docx_file.read())
 
-    with open(output_docx_path, 'rb') as docx_file:
-        output_stream.write(docx_file.read())
-
-    os.unlink(output_docx_path)
+        # Cleanup
+        os.unlink(input_pdf_path)
+        os.unlink(output_docx_path)
