@@ -53,25 +53,67 @@ function displayError(message) {
  */
 function submitFileForConversion(formData) {
     var conversionType = document.getElementById('conversionType').value;
-    var actionUrl = conversionType === 'pdf' ? '/txt_to_pdf' : '/txt_to_docx';
+    var actionUrl;
 
+    // Determine the action URL based on the selected conversion type
+    switch (conversionType) {
+        case 'pdf':
+            actionUrl = '/convert_to_pdf';
+            break;
+        case 'docx':
+            actionUrl = '/convert_to_docx';
+            break;
+        case 'txt':
+            actionUrl = '/convert_to_txt';
+            break;
+        default:
+            displayError('Unsupported conversion type selected');
+            return;
+    }
+
+    // Perform the fetch request
     fetch(actionUrl, {
         method: 'POST',
         body: formData,
     })
     .then(response => {
+        // Check if the response is OK (status 200-299)
         if (!response.ok) {
-            // Parse and reject the promise if there are errors
-            return response.json().then(data => Promise.reject(data));
+            // If not OK, attempt to parse it as JSON for the error message
+            return response.json().then(error => Promise.reject(error));
         }
-        // Handle successful conversion here (not implemented in the provided code)
+        // Check the content type of the response
+        const contentType = response.headers.get('Content-Type') || '';
+        if (contentType.includes('application/json')) {
+            // If the response is JSON, there might be an error message
+            return response.json().then(error => Promise.reject(error));
+        } else {
+            // If the response is not JSON, assume it's a file to be downloaded
+            return response.blob().then(blob => {
+                return {
+                    blob: blob,
+                    filename: response.headers.get('Content-Disposition').split('filename=')[1].replaceAll('"', '')
+                };
+            });
+        }
+    })
+    .then(({ blob, filename }) => {
+
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename || 'downloaded_file';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     })
     .catch(error => {
-        // Log and display errors from the conversion process
-        console.error('Conversion error:', error);
+        // Handle JSON errors or network issues
+        console.error('Error during conversion:', error);
         displayError(error.error || 'An error occurred during file conversion.');
     });
 }
+
 
 /**
  * Event listener for change in conversion type selection.
