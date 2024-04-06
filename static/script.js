@@ -57,6 +57,9 @@ function submitFileForConversion(formData) {
 
     // Determine the action URL based on the selected conversion type
     switch (conversionType) {
+        case 'rtf':
+            actionUrl = '/convert_to_rtf'
+            break;
         case 'pdf':
             actionUrl = '/convert_to_pdf';
             break;
