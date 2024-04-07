@@ -52,30 +52,12 @@ function displayError(message) {
  * @param {FormData} formData - The FormData object containing the file to be converted.
  */
 function submitFileForConversion(formData) {
+    // Append the selected conversion type to the FormData object
     var conversionType = document.getElementById('conversionType').value;
-    var actionUrl;
+    formData.append('target_format', conversionType);
 
-    // Determine the action URL based on the selected conversion type
-    switch (conversionType) {
-        case 'rtf':
-            actionUrl = '/convert_to_rtf'
-            break;
-        case 'pdf':
-            actionUrl = '/convert_to_pdf';
-            break;
-        case 'docx':
-            actionUrl = '/convert_to_docx';
-            break;
-        case 'txt':
-            actionUrl = '/convert_to_txt';
-            break;
-        default:
-            displayError('Unsupported conversion type selected');
-            return;
-    }
-
-    // Perform the fetch request
-    fetch(actionUrl, {
+    // Perform the fetch request to the single /convert endpoint
+    fetch('/convert', {
         method: 'POST',
         body: formData,
     })
