@@ -7,5 +7,7 @@ mime_types = {
     'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     'txt': 'text/plain',
     'rtf': 'application/rtf',
+    'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'csv': 'text/csv'
 
 }
