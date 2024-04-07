@@ -2,7 +2,7 @@ from base_converter import BaseConverter
 from io import BytesIO
 import os
 import tempfile
-from Config import libreoffice_path
+from utility import libreoffice_path
 import subprocess
 from logger_config import configure_logger
 

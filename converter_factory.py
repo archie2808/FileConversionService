@@ -14,6 +14,7 @@ from docx_to_rtf_converter import DocxToRTFConverter
 from pdf_to_rtf_converter import PDFToRTFConverter
 from csv_to_xlsx_converter import CSVtoXLSXConverter
 from xlsx_to_csv_converter import XlSXtoCSVConverter
+from image_converter import DynamicImageConverter
 
 
 
@@ -37,6 +38,11 @@ class ConverterFactory:
             ('csv', 'xlsx'): CSVtoXLSXConverter
 
         }
+
+        image_formats = ['png', 'jpeg', 'jpg', 'gif', 'tiff', 'bmp']
+        if source_format in image_formats and target_format in image_formats:
+            # Pass only input_stream and target_format, not source_format
+            return DynamicImageConverter(input_stream, target_format)
 
         # Attempt to fetch the converter class based on the provided source and target formats
         converter_class = converter_map.get((source_format, target_format))

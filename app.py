@@ -3,7 +3,9 @@ from io import BytesIO, FileIO
 import traceback
 from logger_config import configure_logger
 from converter_factory import ConverterFactory
-import Config
+from werkzeug.utils import secure_filename
+import utility
+import os
 
 app = Flask(__name__)
 app.secret_key = 'secret_key'
@@ -43,7 +45,7 @@ def convert_file():
         output_stream = BytesIO()
         converter.convert(output_stream)
 
-        mimetype = Config.mime_types.get(target_format, 'application/octet-stream')
+        mimetype = utility.mime_types.get(target_format, 'application/octet-stream')
 
         output_stream.seek(0)
 
@@ -55,27 +57,60 @@ def convert_file():
         return jsonify({'error': 'Conversion failed'}), 500
 
 
+@app.route('/convert_image', methods=['POST'])
+def convert_image():
+    logger.debug("hiya")
+    file = request.files['file']
+    target_format = request.form['target_format'].lower()
+
+    # Infer the source format from the file extension
+    source_format = file.filename.rsplit('.', 1)[-1].lower()
+
+    input_stream = BytesIO(file.read())
+    output_stream = BytesIO()
+
+    try:
+        converter = ConverterFactory.get_converter(input_stream, source_format, target_format)
+        converter.convert(output_stream)
+        logger.debug(f"Converting from {source_format} to {target_format}")
+        output_stream.seek(0)
+        mime_types = utility.image_mime_types.get(target_format, 'image')
+        return send_file(output_stream, mimetype=mime_types, as_attachment=True, download_name=f"{file.filename.rsplit('.', 1)[0]}")
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 400
+    except Exception as e:
+        logger.error(f"Conversion failed: {e}")
+        return jsonify({'error': 'Conversion failed: ' + str(e)}), 500
+
+
 @app.route('/validate_file', methods=['POST'])
 def validate_file():
-    """Validates the uploaded file to ensure it meets the requirements for conversion.
-
-    The function checks if the file exists in the request, if a file is selected,
-    and if the file type is one of the allowed types (.txt, .pdf, .docx). It returns
-    a JSON message indicating success or describing the validation error.
-
-    Returns:
-        A JSON response indicating the result of the validation process.
-    """
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'}), 400
     file = request.files['file']
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
-    if not file.filename.endswith(('.txt', '.pdf', '.docx', '.rtf', 'csv', 'xlsx')):
-        return jsonify({'error': 'Unsupported File Type'}), 400
-    else:
-        return jsonify({'message': 'File is valid'}), 200
 
+    # Ensure the filename is secure
+    filename = secure_filename(file.filename)
+
+    temp_path = os.path.join('/tmp', filename)
+    file.save(temp_path)
+
+    # Perform the ClamAV file scan
+    scan_result = utility.scan_file_with_clamav(temp_path)
+
+
+    os.remove(temp_path)
+
+    if scan_result is not None:
+        # If malware is detected, return an error
+        return jsonify({'error': 'Malicious file detected', 'details': scan_result}), 400
+
+    # If no malware is detected, proceed with further validation
+    # (file type check, etc.)
+
+    return jsonify({'message': 'File is valid and safe to process'}), 200
 
 
 if __name__ == '__main__':
