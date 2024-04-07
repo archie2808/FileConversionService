@@ -31,6 +31,6 @@ class DocxToRTFConverter(BaseConverter):
                 return output_stream
 
         except subprocess.CalledProcessError:
-            raise ("Conversion failed: Pandoc encountered an error while converting the document.")
+            raise "Conversion failed: Pandoc encountered an error while converting the document."
         except Exception as e:
             print(f"An unexpected error occurred: {e}")

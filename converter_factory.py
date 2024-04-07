@@ -12,6 +12,8 @@ from rtf_to_txt_converter import RTFToTXTConverter
 from rtf_to_pdf_converter import RTFtoPDFConverter
 from docx_to_rtf_converter import DocxToRTFConverter
 from pdf_to_rtf_converter import PDFToRTFConverter
+from csv_to_xlsx_converter import CSVtoXLSXConverter
+from xlsx_to_csv_converter import XlSXtoCSVConverter
 
 
 
@@ -30,7 +32,9 @@ class ConverterFactory:
             ('rtf', 'txt'): RTFToTXTConverter,
             ('rtf', 'pdf'): RTFtoPDFConverter,
             ('pdf', 'rtf'): PDFToRTFConverter,
-            ('docx', 'rtf'): DocxToRTFConverter
+            ('docx', 'rtf'): DocxToRTFConverter,
+            ('xlsx', 'csv'): XlSXtoCSVConverter,
+            ('csv', 'xlsx'): CSVtoXLSXConverter
 
         }
 

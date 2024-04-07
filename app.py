@@ -71,7 +71,7 @@ def validate_file():
     file = request.files['file']
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
-    if not file.filename.endswith(('.txt', '.pdf', '.docx', '.rtf')):
+    if not file.filename.endswith(('.txt', '.pdf', '.docx', '.rtf', 'csv', 'xlsx')):
         return jsonify({'error': 'Unsupported File Type'}), 400
     else:
         return jsonify({'message': 'File is valid'}), 200
