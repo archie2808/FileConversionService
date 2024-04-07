@@ -56,11 +56,20 @@ function submitFileForConversion(formData) {
     var conversionType = document.getElementById('conversionType').value;
     formData.append('target_format', conversionType);
 
-    // Perform the fetch request to the single /convert endpoint
-    fetch('/convert', {
+    var form = document.getElementById('uploadForm');
+
+    if (['csv', 'jpg', 'jpeg', 'gif', 'tiff', 'bmp', 'png'].includes(conversionType)) {
+    form.action = '/convert_image';
+    } else {
+    form.action = '/convert';
+    }
+
+    fetch(form.action, {
         method: 'POST',
         body: formData,
     })
+
+
     .then(response => {
         // Check if the response is OK (status 200-299)
         if (!response.ok) {

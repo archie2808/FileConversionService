@@ -4,7 +4,7 @@ import os
 from io import BytesIO
 from logger_config import configure_logger
 from base_converter import BaseConverter
-from Config import libreoffice_path
+from utility import libreoffice_path
 
 logger = configure_logger(__name__)
 
