@@ -93,12 +93,13 @@ def validate_file():
 
     # Ensure the filename is secure
     filename = secure_filename(file.filename)
-
+    logger.debug(f"Validating file: {filename}")
     temp_path = os.path.join('/tmp', filename)
     file.save(temp_path)
 
     # Perform the ClamAV file scan
     scan_result = utility.scan_file_with_clamav(temp_path)
+    logger.debug("scan_result: {scan_result}")
 
 
     os.remove(temp_path)
@@ -111,6 +112,7 @@ def validate_file():
     # (file type check, etc.)
 
     return jsonify({'message': 'File is valid and safe to process'}), 200
+
 
 
 if __name__ == '__main__':
