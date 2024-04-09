@@ -15,12 +15,12 @@ class DynamicImageConverter(BaseConverter):
         image = Image.open(self.input_stream)
         logger.debug(f"image mode: {image}")
 
-        # Handle transparency for formats that don't support it, if necessary
+        # Handle transparency for formats that don't support it
         if self.target_format == 'jpeg' and (image.mode in ('RGBA', 'LA') or ('transparency' in image.info)):
             logger.debug(f"target format {self.target_format} and image mode {image.mode}")
 
             background = Image.new("RGB", image.size, (255, 255, 255))
-            background.paste(image, mask=image.split()[3])  # 3 is the alpha channel
+            background.paste(image, mask=image.split()[3])
             image = background
         else:
             image = image.convert("RGB")
