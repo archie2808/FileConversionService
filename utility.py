@@ -22,8 +22,9 @@ image_mime_types = {
 
         }
 
+
 def scan_file_with_clamav(file_path):
-    cd = pyclamd.ClamdUnixSocket()
+    cd = pyclamd.ClamdUnixSocket('/tmp/clamd.socket')
 
     try:
         scan_result = cd.scan_file(file_path)
@@ -38,3 +39,4 @@ def scan_file_with_clamav(file_path):
 
     # Return None if the file is clean
     return None
+
