@@ -33,24 +33,10 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     });
 });
 
-/**
- * Displays an error message using an alert.
- *
- * @param {string} message - The error message to be displayed.
- */
 function displayError(message) {
    alert(message);
 }
 
-/**
- * Submits the file for conversion based on the selected conversion type.
- *
- * After successful validation, this function submits the file to the appropriate
- * conversion endpoint using fetch. It handles the server's response, including
- * displaying errors if the conversion fails.
- *
- * @param {FormData} formData - The FormData object containing the file to be converted.
- */
 function submitFileForConversion(formData) {
     // Append the selected conversion type to the FormData object
     var conversionType = document.getElementById('conversionType').value;
@@ -58,31 +44,35 @@ function submitFileForConversion(formData) {
 
     var form = document.getElementById('uploadForm');
 
+    // Determine the appropriate action based on the conversion type
     if (['csv', 'jpg', 'jpeg', 'gif', 'tiff', 'bmp', 'png'].includes(conversionType)) {
-    form.action = '/convert_image';
+        form.action = '/convert_image';
     } else {
-    form.action = '/convert';
+        form.action = '/convert';
     }
+
+    // Initialize a timeout to display the loading symbol after 5 seconds
+    let loadingTimeout = setTimeout(() => {
+        document.getElementById('loadingSymbol').style.display = 'block';
+        // Disable UI components to prevent further interactions
+        document.getElementById('fileInput').disabled = true;
+        document.getElementById('conversionType').disabled = true;
+        document.querySelector('button[type="submit"]').disabled = true;
+    }, 500);
 
     fetch(form.action, {
         method: 'POST',
         body: formData,
     })
-
-
     .then(response => {
-        // Check if the response is OK (status 200-299)
+        clearTimeout(loadingTimeout); // Clear the timeout if the response is faster than 5 seconds
         if (!response.ok) {
-            // If not OK, attempt to parse it as JSON for the error message
             return response.json().then(error => Promise.reject(error));
         }
-        // Check the content type of the response
         const contentType = response.headers.get('Content-Type') || '';
         if (contentType.includes('application/json')) {
-            // If the response is JSON, there might be an error message
             return response.json().then(error => Promise.reject(error));
         } else {
-            // If the response is not JSON, assume it's a file to be downloaded
             return response.blob().then(blob => {
                 return {
                     blob: blob,
@@ -92,7 +82,6 @@ function submitFileForConversion(formData) {
         }
     })
     .then(({ blob, filename }) => {
-
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
@@ -102,9 +91,16 @@ function submitFileForConversion(formData) {
         document.body.removeChild(a);
     })
     .catch(error => {
-        // Handle JSON errors or network issues
         console.error('Error during conversion:', error);
         displayError(error.error || 'An error occurred during file conversion.');
+    })
+    .finally(() => {
+        clearTimeout(loadingTimeout); // Ensure the timeout is cleared to prevent it from running late
+        // Re-enable UI components and hide loading symbol regardless of the outcome
+        document.getElementById('loadingSymbol').style.display = 'none';
+        document.getElementById('fileInput').disabled = false;
+        document.getElementById('conversionType').disabled = false;
+        document.querySelector('button[type="submit"]').disabled = false;
     });
 }
 
