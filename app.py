@@ -101,16 +101,13 @@ def validate_file():
     scan_result = utility.scan_file_with_clamav(temp_path)
     logger.debug("scan_result: {scan_result}")
 
-
     os.remove(temp_path)
 
     if scan_result is not None:
         # If malware is detected, return an error
         return jsonify({'error': 'Malicious file detected', 'details': scan_result}), 400
-
-    # If no malware is detected, proceed with further validation
-
-    return jsonify({'message': 'File is valid and safe to process'}), 200
+    else:
+        return jsonify({'message': 'File is valid and safe to process'}), 200
 
 
 

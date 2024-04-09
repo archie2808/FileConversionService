@@ -1,10 +1,11 @@
+
 import subprocess
 import tempfile
 from io import BytesIO
 from base_converter import BaseConverter
 import logger_config
 
-# Configure your logger
+
 logger = logger_config.configure_logger(__name__)
 
 
@@ -14,10 +15,8 @@ class RTFToTXTConverter(BaseConverter):
             temp_rtf_file.write(self.input_stream.getvalue())
             temp_rtf_file.flush()
 
-        # Path for the temporary text file
         temp_txt_path = temp_rtf_file.name + ".txt"
 
-        # Construct the UnRTF command
         command = ['unrtf', '--text', temp_rtf_file.name]
 
         try:

@@ -14,19 +14,15 @@ class PDFToTXTConverter(BaseConverter):
         BytesIO: An output stream containing all text extracted from the PDF document.
         """
 
-        # Ensure the input stream is at the start
         self.input_stream.seek(0)
 
-        # Initialize an empty text string
         text = ''
         with fitz.open(stream=self.input_stream) as doc:
             for page in doc:
                 text += page.get_text()
 
-
         output_stream.write(text.encode('utf-8'))
 
-        # Reset the stream position to the start for reading
         output_stream.seek(0)
 
         return output_stream
