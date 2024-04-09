@@ -14,6 +14,11 @@ class PDFToRTFConverter(BaseConverter):
             rtf_text += text.replace('\n', '\\par\n') + '\\par\n'
 
         rtf_text += "}"
-        output_stream = io.BytesIO(rtf_text.encode('utf-8'))
-        return output_stream
 
+
+        output_stream.write(rtf_text.encode('utf-8'))
+
+
+        output_stream.seek(0)
+
+        return output_stream

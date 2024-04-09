@@ -13,13 +13,13 @@ class RTFtoPDFConverter(BaseConverter):
     def convert(self, output_stream: BytesIO):
         with tempfile.TemporaryDirectory() as tmpdirname:
             rtf_path = os.path.join(tmpdirname, "input.rtf")
-            pdf_path = os.path.join(tmpdirname, "input.pdf")  # Changed to "output.pdf" for clarity
+            pdf_path = os.path.join(tmpdirname, "input.pdf")
 
             logger.info(f"Temporary RTF path: {rtf_path}")
             logger.info(f"Temporary PDF path: {pdf_path}")
 
             with open(rtf_path, 'wb') as tmp_rtf:
-                tmp_rtf.write(self.input_stream.read())  # Ensure self.input_stream is used
+                tmp_rtf.write(self.input_stream.read())
             logger.info("Written RTF content to temporary file")
 
             cmd = [libreoffice_path, '--headless', '--convert-to', 'pdf', '--outdir', tmpdirname, rtf_path]
@@ -29,7 +29,7 @@ class RTFtoPDFConverter(BaseConverter):
                 subprocess.run(cmd, check=True, capture_output=True)
                 logger.info("Conversion command executed successfully")
             except subprocess.CalledProcessError as e:
-                logger.error(f"LibreOffice conversion failed: {e.stderr}")  # Use e.stderr.decode() if needed
+                logger.error(f"LibreOffice conversion failed: {e.stderr}")
                 raise RuntimeError("LibreOffice conversion failed.")
 
             if not os.path.exists(pdf_path):

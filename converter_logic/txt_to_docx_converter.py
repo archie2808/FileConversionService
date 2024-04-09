@@ -15,5 +15,5 @@ class TXTToDocxConverter(BaseConverter):
             for line in lines[1:]:
                 doc.add_paragraph(line)
 
-        # Save DOCX to an output stream
+
         doc.save(output_stream)

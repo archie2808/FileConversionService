@@ -109,7 +109,6 @@ def validate_file():
         return jsonify({'error': 'Malicious file detected', 'details': scan_result}), 400
 
     # If no malware is detected, proceed with further validation
-    # (file type check, etc.)
 
     return jsonify({'message': 'File is valid and safe to process'}), 200
 

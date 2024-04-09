@@ -22,7 +22,7 @@ class PDFToDocxConverter(BaseConverter):
                 tempfile.NamedTemporaryFile(delete=True, suffix='.docx') as temp_docx_file:
 
             # Write the input stream content to the temporary PDF file
-            self.input_stream.seek(0)  # Ensure the stream is at the start
+            self.input_stream.seek(0)
             temp_pdf_file.write(self.input_stream.read())
             temp_pdf_file.flush()  # Make sure data is written to disk
 
@@ -37,7 +37,6 @@ class PDFToDocxConverter(BaseConverter):
                 logger.error(f"PDF to DOCX conversion failed: {e}")
                 raise RuntimeError("Failed to convert PDF to DOCX.")
 
-            # Read the converted DOCX file back into the output stream
             with open(output_docx_path, 'rb') as docx_file:
                 output_stream.write(docx_file.read())
 
