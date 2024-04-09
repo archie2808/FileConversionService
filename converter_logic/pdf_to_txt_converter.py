@@ -23,7 +23,7 @@ class PDFToTXTConverter(BaseConverter):
             for page in doc:
                 text += page.get_text()
 
-        # Write the extracted text to the output stream
+
         output_stream.write(text.encode('utf-8'))
 
         # Reset the stream position to the start for reading
