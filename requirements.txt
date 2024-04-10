@@ -7,3 +7,5 @@ pandas~=2.2.1
 pdf2docx~=0.5.8
 Werkzeug~=3.0.1
 pyClamd~=0.4.0
+Werkzeug~=3.0.1
+pyClamd~=0.4.0
