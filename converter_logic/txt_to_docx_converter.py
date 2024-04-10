@@ -16,7 +16,7 @@ class TXTToDocxConverter(BaseConverter):
         Reads plain text from the input stream, creates a DOCX document, and saves it to the output stream.
 
         Parameters:
-            output_stream (BytesIO): The stream where the DOCX file will be saved.
+            output_stream (BytesIO): The stream where the DOCX file will be saved..
         """
         doc = docx.Document()
         input_text = self.input_stream.getvalue().decode('utf-8')
