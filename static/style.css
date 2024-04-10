@@ -1,40 +1,72 @@
-body {
+body, html {
     font-family: 'Arial', sans-serif;
-    background-color: #000000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: #ffffff;
+    height: 100%;
     margin: 0;
 }
-
-h1 {
-    color: #a200fd;
-}
-
 form {
-    background-color: #11fd00;
-    padding: 20px;
+    background-color: #00e3f8;
+    padding: 80px;
+    width: auto;
+    max-width: 600px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
-input[type="file"] {
-    margin-bottom: 10px;
+input[type="file"], select, button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 button {
     background-color: #007bff;
-    color: #000000;
+    color: #ffffff;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 15px 20px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
 button:hover {
     background-color: #0056b3;
 }
+header {
+    background-color: #0e0e0e;
+    color: #ffffff;
+    padding: 5px 20px;
+    text-align: -webkit-center;
+    box-shadow: 0 5px 15px 5px rgba(0,0,0,0.3);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 60px;
+    flex-grow: 2;
+    margin-top: 60px;
+    margin-left: 200px;
+    margin-right: 200px;
+    z-index: 1;
+}
+
+
 
 .loading-overlay {
     position: fixed;
@@ -42,16 +74,16 @@ button:hover {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(255, 255, 255, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Ensure it covers other elements */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
 }
 
 .loading-spinner {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #3498db;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -62,3 +94,20 @@ button:hover {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.loading-message {
+    margin-top: 20px;
+    color: #fff;
+    font-size: 1.2em;
+    text-align: center;
+}
+.form-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-header h2 {
+    color: #333;
+    font-size: 1em;
+}
+
