@@ -10,8 +10,25 @@ logger = configure_logger(__name__)
 
 
 class DocxToPDFConverter(BaseConverter):
-    def convert(self, output_stream: BytesIO):
+    """
+    Converter for transforming a DOCX file into a PDF file.
 
+    Utilizes LibreOffice for the conversion process. Inherits from BaseConverter
+    and implements the convert method to convert a DOCX file from the input_stream
+    to PDF format, writing the result to the output_stream.
+    """
+
+    def convert(self, output_stream: BytesIO):
+        """
+        Converts DOCX to PDF using LibreOffice and writes the result to output_stream.
+
+        Parameters:
+            output_stream (BytesIO): The stream to which the converted PDF file will be written.
+
+        Raises:
+            RuntimeError: If the DOCX to PDF conversion fails.
+            FileNotFoundError: If the expected PDF file is not created.
+        """
         with tempfile.TemporaryDirectory() as tmpdirname:
             docx_path = os.path.join(tmpdirname, "input.docx")
             pdf_path = os.path.join(tmpdirname, "input.pdf")

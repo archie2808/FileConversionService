@@ -8,9 +8,26 @@ import logger_config
 
 logger = logger_config.configure_logger(__name__)
 
-
 class DocxToRTFConverter(BaseConverter):
+    """
+    Converter for transforming a DOCX file into an RTF file.
+
+    This converter uses Pandoc to perform the conversion. Inherits from
+    BaseConverter and implements the convert method to handle the DOCX to RTF
+    transformation, outputting the result to the output_stream.
+    """
+
     def convert(self, output_stream: BytesIO):
+        """
+        Converts DOCX to RTF using Pandoc and writes the result to output_stream.
+
+        Parameters:
+            output_stream (BytesIO): The stream to which the converted RTF file will be written.
+
+        Raises:
+            RuntimeError: If there's an error during conversion with Pandoc.
+        """
+
         try:
             # Use a temporary directory to hold the files
             with tempfile.TemporaryDirectory() as tmpdir:

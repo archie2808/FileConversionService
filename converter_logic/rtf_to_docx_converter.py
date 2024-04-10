@@ -10,7 +10,21 @@ logger = configure_logger(__name__)
 
 
 class RTFToDocxConverter(BaseConverter):
+    """
+    Converts RTF documents to DOCX format using LibreOffice.
+    """
+
     def convert(self, output_stream: BytesIO):
+        """
+        Converts the input RTF (from input_stream) to a DOCX file, writing the result to output_stream.
+
+        Parameters:
+            output_stream (BytesIO): The stream to which the converted DOCX file will be written.
+
+        Raises:
+            RuntimeError: If the RTF to DOCX conversion process fails.
+            FileNotFoundError: If the expected DOCX file is not created.
+        """
         with tempfile.TemporaryDirectory() as tmpdirname:
             rtf_path = os.path.join(tmpdirname, "input.rtf")
             docx_path = os.path.join(tmpdirname, "input.docx")

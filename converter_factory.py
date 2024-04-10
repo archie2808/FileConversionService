@@ -18,8 +18,37 @@ from converter_logic.image_converter import DynamicImageConverter
 
 
 class ConverterFactory:
+    """
+    A factory class to retrieve the appropriate converter class based on the specified source and target formats.
+
+    The factory method `get_converter` maps pairs of source and target formats to their corresponding
+    converter classes. If a conversion between the specified formats is supported, an instance of the
+    converter class is returned. This class encapsulates the logic required to select the correct
+    converter for a given file conversion task, abstracting away the need for the caller to
+    directly instantiate converter classes.
+    """
+
     @staticmethod
     def get_converter(input_stream: BytesIO, source_format: str, target_format: str) -> BaseConverter:
+        """
+        Retrieves a converter object capable of converting files from the source format to the target format.
+
+        This method uses a predefined mapping of source and target format pairs to their corresponding converter
+        classes. If the specified formats are supported, an instance of the appropriate converter class is returned.
+        If the formats involve image conversion and are supported, a `DynamicImageConverter` is returned. If no
+        suitable converter is found, a ValueError is raised.
+
+        Parameters:
+            input_stream (BytesIO): A binary stream of the input file to be converted.
+            source_format (str): The format of the input file.
+            target_format (str): The desired format of the output file.
+
+        Returns:
+            BaseConverter: An instance of a subclass of `BaseConverter` tailored to the requested conversion.
+
+        Raises:
+            ValueError: If the conversion from source_format to target_format is unsupported.
+        """
         converter_map = {
             ('pdf', 'docx'): PDFToDocxConverter,
             ('docx', 'pdf'): DocxToPDFConverter,
@@ -42,10 +71,9 @@ class ConverterFactory:
         if source_format in image_formats and target_format in image_formats:
             return DynamicImageConverter(input_stream, target_format)
 
-        # Attempt to fetch the converter class based on the provided source and target formats
+        # Fetch the converter class from the mapping
         converter_class = converter_map.get((source_format, target_format))
         if converter_class:
             return converter_class(input_stream)
         else:
             raise ValueError(f"Unsupported conversion from {source_format} to {target_format}")
-

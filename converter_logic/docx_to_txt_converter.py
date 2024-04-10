@@ -4,7 +4,24 @@ import docx
 
 
 class DOCXtoTXTConverter(BaseConverter):
+    """
+    Converter for transforming a DOCX file into a plain text file.
+
+    Reads the contents of a DOCX file from input_stream, extracts the text, and writes
+    it to the output_stream in plain text format. Inherits from BaseConverter and
+    implements the convert method to perform this specific conversion.
+    """
+
     def convert(self, output_stream: BytesIO):
+        """
+        Extracts text from DOCX and writes it as plain text to output_stream.
+
+        Parameters:
+            output_stream (BytesIO): The stream to which the extracted text will be written.
+
+        Returns:
+            The number of bytes written to output_stream.
+        """
 
         # Ensure the input stream is at the start
         self.input_stream.seek(0)

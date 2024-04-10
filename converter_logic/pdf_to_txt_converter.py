@@ -2,6 +2,7 @@ from io import BytesIO
 import fitz
 from base_converter import BaseConverter
 
+
 class PDFToTXTConverter(BaseConverter):
     def convert(self, output_stream: BytesIO):
         """
