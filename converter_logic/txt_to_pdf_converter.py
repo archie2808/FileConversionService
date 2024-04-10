@@ -6,7 +6,20 @@ from base_converter import BaseConverter
 from io import BytesIO
 
 class TXTtoPDFConverter(BaseConverter):
+    """
+    Converts plain text to PDF format.
+
+    Utilizes ReportLab to generate a PDF document from plain text content. Inherits from
+    BaseConverter and implements the document creation process.
+    """
+
     def convert(self, output_stream: BytesIO):
+        """
+        Transforms the input plain text into a PDF document and writes it to the output stream.
+
+        Parameters:
+            output_stream (BytesIO): The stream where the PDF content will be written.
+        """
         c = canvas.Canvas(output_stream, pagesize=letter)
         width, height = letter
         styles = getSampleStyleSheet()

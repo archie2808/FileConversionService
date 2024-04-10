@@ -10,7 +10,22 @@ logger = logger_config.configure_logger(__name__)
 
 
 class RTFToTXTConverter(BaseConverter):
+    """
+    Converts RTF formatted text to plain text using the 'unrtf' command-line tool.
+
+    Inherits from BaseConverter and utilizes subprocess to call 'unrtf' for conversion.
+    """
+
     def convert(self, output_stream: BytesIO):
+        """
+        Converts the input RTF content to plain text and writes the output to the provided stream.
+
+        Parameters:
+            output_stream (BytesIO): The stream to write the converted text to.
+
+        Raises:
+            RuntimeError: If the RTF to TXT conversion fails.
+        """
         with tempfile.NamedTemporaryFile(delete=False, suffix='.rtf', mode='wb') as temp_rtf_file:
             temp_rtf_file.write(self.input_stream.getvalue())
             temp_rtf_file.flush()

@@ -29,6 +29,15 @@ def index():
 
 @app.route('/convert', methods=['POST'])
 def convert_file():
+    """
+    Handles file conversion requests. Validates the request form and file,
+     performs the conversion based on the target format specified by the user,
+    and sends the converted file back as a response.
+
+    Returns:
+        send_file: Sends the converted file as an attachment to the user if successful.
+        jsonify: Returns a JSON object with an error message if the conversion fails or if validation fails.
+    """
     if 'target_format' not in request.form:
         return jsonify({'error': 'Cannot convert same files'}), 400
     file = request.files['file']
@@ -59,11 +68,17 @@ def convert_file():
 
 @app.route('/convert_image', methods=['POST'])
 def convert_image():
-    logger.debug("hiya")
+    """
+        Handles image conversion requests specifically. Similar to convert_file, but
+        optimized for image files. Uses a different set of MIME types.
+
+        Returns:
+            send_file: Sends the converted image file as an attachment if successful.
+            jsonify: Returns a JSON object with an error message if the conversion fails or if validation fails.
+        """
     file = request.files['file']
     target_format = request.form['target_format'].lower()
 
-    # Infer the source format from the file extension
     source_format = file.filename.rsplit('.', 1)[-1].lower()
 
     input_stream = BytesIO(file.read())
@@ -85,6 +100,15 @@ def convert_image():
 
 @app.route('/validate_file', methods=['POST'])
 def validate_file():
+    """
+       Validates the uploaded file for presence and non-emptiness, then performs
+       a malware scan using ClamAV. Returns a message indicating whether the file
+       is safe to process or not.
+
+       Returns:
+           jsonify: Returns a JSON object indicating the file is valid and safe, or
+           containing an error if the file is found to be malicious or if the scan fails.
+       """
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'}), 400
     file = request.files['file']

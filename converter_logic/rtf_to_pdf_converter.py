@@ -10,7 +10,24 @@ logger = configure_logger(__name__)
 
 
 class RTFtoPDFConverter(BaseConverter):
+    """
+    A converter class that transforms an RTF document into a PDF file using LibreOffice.
+
+    This class inherits from BaseConverter and overrides the convert method to perform the
+    specific document conversion from RTF to PDF format.
+    """
+
     def convert(self, output_stream: BytesIO):
+        """
+        Executes the conversion process from RTF to PDF and writes the output to the provided stream.
+
+        Parameters:
+            output_stream (BytesIO): The stream where the converted PDF content will be written.
+
+        Raises:
+            RuntimeError: If the conversion process fails due to LibreOffice errors.
+            FileNotFoundError: If the converted PDF file is not generated as expected.
+        """
         with tempfile.TemporaryDirectory() as tmpdirname:
             rtf_path = os.path.join(tmpdirname, "input.rtf")
             pdf_path = os.path.join(tmpdirname, "input.pdf")
