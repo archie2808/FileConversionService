@@ -99,12 +99,3 @@ function submitFileForConversion(formData) {
 }
 
 
-/**
- * Event listener for change in conversion type selection.
- *
- * This part of the script is reserved for handling changes in the conversion
- * type selection by the user, which could be extended for additional functionality.
- */
-document.getElementById('conversionType').addEventListener('change', function() {
-    // This part remains unchanged
-});

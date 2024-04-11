@@ -230,3 +230,102 @@ TypeError: exceptions must derive from BaseException
 2024-04-09 18:44:20,163 - converter_logic.rtf_to_docx_converter - INFO - Conversion command executed successfully
 2024-04-09 18:44:36,656 - __main__ - DEBUG - Validating file: Reportp1_4.pdf
 2024-04-09 18:44:36,666 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 12:48:19,998 - __main__ - DEBUG - Validating file: Reportp1_4_7.rtf
+2024-04-11 12:48:20,055 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 12:48:20,092 - converter_logic.rtf_to_docx_converter - INFO - Temporary RTF path: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpsqgxcdmy/input.rtf
+2024-04-11 12:48:20,092 - converter_logic.rtf_to_docx_converter - INFO - Temporary DOCX path: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpsqgxcdmy/input.docx
+2024-04-11 12:48:20,094 - converter_logic.rtf_to_docx_converter - INFO - Written RTF content to temporary file
+2024-04-11 12:48:20,096 - __main__ - ERROR - Conversion failed: Traceback (most recent call last):
+  File "/Users/ag/PycharmProjects/FileConversionServiceX/app.py", line 53, in convert_file
+    converter.convert(output_stream)
+  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_docx_converter.py", line 40, in convert
+    logger.info(f"Executing command: {' '.join(cmd)}")
+                                      ^^^^^^^^^^^^^
+TypeError: sequence item 0: expected str instance, NoneType found
+
+2024-04-11 12:49:29,464 - __main__ - DEBUG - Validating file: Reportp1_4_6.rtf
+2024-04-11 12:49:29,518 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 12:49:29,557 - converter_logic.rtf_to_docx_converter - INFO - Temporary RTF path: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpys61cx35/input.rtf
+2024-04-11 12:49:29,557 - converter_logic.rtf_to_docx_converter - INFO - Temporary DOCX path: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpys61cx35/input.docx
+2024-04-11 12:49:29,559 - converter_logic.rtf_to_docx_converter - INFO - Written RTF content to temporary file
+2024-04-11 12:49:29,565 - __main__ - ERROR - Conversion failed: Traceback (most recent call last):
+  File "/Users/ag/PycharmProjects/FileConversionServiceX/app.py", line 53, in convert_file
+    converter.convert(output_stream)
+  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_docx_converter.py", line 43, in convert
+    subprocess.run(cmd, check=True, capture_output=True)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/subprocess.py", line 1824, in _execute_child
+    and os.path.dirname(executable)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 181, in dirname
+TypeError: expected str, bytes or os.PathLike object, not NoneType
+
+2024-04-11 12:51:27,036 - __main__ - DEBUG - Validating file: Reportp1_4_6.rtf
+2024-04-11 12:51:27,091 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 12:51:27,127 - converter_logic.rtf_to_docx_converter - INFO - Temporary RTF path: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmph0t1eoxe/input.rtf
+2024-04-11 12:51:27,127 - converter_logic.rtf_to_docx_converter - INFO - Temporary DOCX path: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmph0t1eoxe/input.docx
+2024-04-11 12:51:27,130 - converter_logic.rtf_to_docx_converter - INFO - Written RTF content to temporary file
+2024-04-11 12:51:29,316 - converter_logic.rtf_to_docx_converter - INFO - Conversion command executed successfully
+2024-04-11 12:55:47,550 - __main__ - DEBUG - Validating file: Reportp1_2.docx
+2024-04-11 12:55:47,579 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 12:55:47,599 - converter_logic.docx_to_rtf_converter - DEBUG - Created temporary directory: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp_h6gevg6
+2024-04-11 12:55:47,600 - converter_logic.docx_to_rtf_converter - DEBUG - Temporary paths set for input: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp_h6gevg6/document.docx and output: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp_h6gevg6/document.rtf
+2024-04-11 12:55:47,604 - converter_logic.docx_to_rtf_converter - DEBUG - Wrote input stream to temporary file
+2024-04-11 12:55:47,604 - converter_logic.docx_to_rtf_converter - DEBUG - Executing command: pandoc -s /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp_h6gevg6/document.docx -o /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp_h6gevg6/document.rtf
+2024-04-11 12:55:51,490 - converter_logic.docx_to_rtf_converter - DEBUG - Pandoc conversion executed successfully
+2024-04-11 12:55:51,493 - converter_logic.docx_to_rtf_converter - DEBUG - Read converted RTF content back into the output stream
+2024-04-11 13:00:58,316 - __main__ - DEBUG - Validating file: ArchieGledhillCV_4.docx
+2024-04-11 13:00:58,364 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:00:58,375 - converter_logic.docx_to_rtf_converter - DEBUG - Created temporary directory: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpn13obi6k
+2024-04-11 13:00:58,375 - converter_logic.docx_to_rtf_converter - DEBUG - Temporary paths set for input: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpn13obi6k/document.docx and output: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpn13obi6k/document.rtf
+2024-04-11 13:00:58,376 - converter_logic.docx_to_rtf_converter - DEBUG - Wrote input stream to temporary file
+2024-04-11 13:00:58,376 - converter_logic.docx_to_rtf_converter - DEBUG - Executing command: pandoc -s /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpn13obi6k/document.docx -o /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpn13obi6k/document.rtf
+2024-04-11 13:00:58,430 - converter_logic.docx_to_rtf_converter - DEBUG - Pandoc conversion executed successfully
+2024-04-11 13:00:58,430 - converter_logic.docx_to_rtf_converter - DEBUG - Read converted RTF content back into the output stream
+2024-04-11 13:01:02,682 - __main__ - DEBUG - Validating file: ArchieGledhillCV_4.docx
+2024-04-11 13:01:02,685 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:01:38,438 - __main__ - DEBUG - Validating file: Reportp1_4_6.docx
+2024-04-11 13:01:41,286 - __main__ - DEBUG - Validating file: Reportp1_4_6.docx
+2024-04-11 13:01:43,383 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:01:46,305 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:02:33,728 - __main__ - DEBUG - Validating file: Reportp1_4_6.docx
+2024-04-11 13:02:33,756 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:03:10,330 - __main__ - DEBUG - Validating file: Reportp1_4_6.docx
+2024-04-11 13:03:10,356 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:06:18,688 - __main__ - DEBUG - Validating file: Reportp1_4_6.docx
+2024-04-11 13:06:18,712 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:06:22,151 - __main__ - DEBUG - Validating file: Reportp1_4_6.docx
+2024-04-11 13:06:22,178 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:07:35,862 - __main__ - DEBUG - Validating file: Reportp1_4_6.docx
+2024-04-11 13:07:35,891 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:07:40,344 - __main__ - DEBUG - Validating file: Reportp1_4_6.docx
+2024-04-11 13:07:40,371 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:10:20,664 - __main__ - DEBUG - Validating file: Reportp1_4_8.rtf
+2024-04-11 13:10:20,723 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:10:20,761 - converter_logic.rtf_to_pdf_converter - INFO - Temporary RTF path: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpyecfpv6x/input.rtf
+2024-04-11 13:10:20,761 - converter_logic.rtf_to_pdf_converter - INFO - Temporary PDF path: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpyecfpv6x/input.pdf
+2024-04-11 13:10:20,764 - converter_logic.rtf_to_pdf_converter - INFO - Written RTF content to temporary file
+2024-04-11 13:10:20,764 - converter_logic.rtf_to_pdf_converter - INFO - Executing command: /Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to pdf --outdir /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpyecfpv6x /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpyecfpv6x/input.rtf
+2024-04-11 13:10:22,673 - converter_logic.rtf_to_pdf_converter - INFO - Conversion command executed successfully
+2024-04-11 13:14:29,014 - __main__ - DEBUG - Validating file: Reportp1_4_6.docx
+2024-04-11 13:14:29,043 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:14:29,065 - converter_logic.docx_to_rtf_converter - DEBUG - Created temporary directory: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp25248iea
+2024-04-11 13:14:29,065 - converter_logic.docx_to_rtf_converter - DEBUG - Temporary paths set for input: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp25248iea/document.docx and output: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp25248iea/document.rtf
+2024-04-11 13:14:29,068 - converter_logic.docx_to_rtf_converter - DEBUG - Wrote input stream to temporary file
+2024-04-11 13:14:29,069 - converter_logic.docx_to_rtf_converter - DEBUG - Executing command: pandoc -s /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp25248iea/document.docx -o /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp25248iea/document.rtf
+2024-04-11 13:14:32,981 - converter_logic.docx_to_rtf_converter - DEBUG - Pandoc conversion executed successfully
+2024-04-11 13:14:32,984 - converter_logic.docx_to_rtf_converter - DEBUG - Read converted RTF content back into the output stream
+2024-04-11 13:16:10,870 - __main__ - DEBUG - Validating file: ArchieGledhillCV_4.pdf
+2024-04-11 13:16:10,894 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:16:13,209 - __main__ - DEBUG - Validating file: ArchieGledhillCV_4.pdf
+2024-04-11 13:16:13,212 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:16:16,361 - __main__ - DEBUG - Validating file: ArchieGledhillCV_4.pdf
+2024-04-11 13:16:16,364 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:16:20,185 - __main__ - DEBUG - Validating file: ArchieGledhillCV_4.pdf
+2024-04-11 13:16:20,188 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-11 13:16:31,054 - __main__ - DEBUG - Validating file: Reportp1_2.docx
+2024-04-11 13:16:31,083 - __main__ - DEBUG - scan_result: {scan_result}

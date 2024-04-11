@@ -10,7 +10,7 @@ including paths to external tools, MIME type mappings, and interfacing with Clam
 
 # Path to the LibreOffice executable. This is used for document conversions.
 # The path can be specified via an environment variable; otherwise, a default path is used.
-libreoffice_path = os.getenv('LIBREOFFICE_PATH')
+libreoffice_path = os.getenv('LIBREOFFICE_PATH', '/Applications/LibreOffice.app/Contents/MacOS/soffice')
 
 # Mapping of file extensions to their MIME types. This is used for setting the Content-Type
 # in HTTP responses when sending files to the client.

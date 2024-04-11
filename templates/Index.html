@@ -37,9 +37,11 @@
         <button id="downloadBtn" style="display: none;">Download File</button>
     </div>
     <div id="loadingSymbol" class="loading-overlay" style="display: none;">
+    <div class="spinner-container">
         <div class="loading-spinner"></div>
-        <p class="loading-message">Processing file...</p>
     </div>
+    <p class="loading-message" style="accent-color: #00e3f8">Processing file...</p>
+</div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

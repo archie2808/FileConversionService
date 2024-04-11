@@ -16,7 +16,7 @@ class BaseConverter(ABC):
 
     def __init__(self, input_stream: BytesIO):
         """
-        Initializes the BaseConverter with the specified input stream.
+        Initialises the BaseConverter with the specified input stream.
 
         Parameters:
             input_stream (BytesIO): The binary stream of the file to be converted.

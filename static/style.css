@@ -90,14 +90,22 @@ header {
     animation: spin 2s linear infinite;
 }
 
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
 .loading-message {
     margin-top: 20px;
-    color: #fff;
+    color: #050505;
+    background-color: red;
     font-size: 1.2em;
     text-align: center;
 }
@@ -110,4 +118,3 @@ header {
     color: #333;
     font-size: 1em;
 }
-

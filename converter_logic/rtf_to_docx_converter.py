@@ -37,7 +37,7 @@ class RTFToDocxConverter(BaseConverter):
             logger.info(f"Written RTF content to temporary file")
             cmd = [libreoffice_path, '--headless', '--convert-to', 'docx', '--outdir', tmpdirname, rtf_path]
 
-            logger.info(f"Executing command: {' '.join(cmd)}")
+            #logger.info(f"Executing command: {' '.join(cmd)}")
 
             try:
                 subprocess.run(cmd, check=True, capture_output=True)
