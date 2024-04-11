@@ -12,6 +12,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     var formData = new FormData();
     formData.append('file', document.getElementById('fileInput').files[0]);
 
+    // Validate the file by sending it to the validation endpoint
     fetch('/validate_file', {
         method: 'POST',
         body: formData,
@@ -22,6 +23,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
             // Display error message if validation fails
             displayError(data.error);
         } else {
+            // Proceed with file conversion if validation succeeds
             submitFileForConversion(formData);
         }
     })
@@ -36,31 +38,34 @@ function displayError(message) {
 }
 
 function submitFileForConversion(formData) {
+    // Append the selected conversion type to the FormData object
     var conversionType = document.getElementById('conversionType').value;
     formData.append('target_format', conversionType);
 
     var form = document.getElementById('uploadForm');
 
-    if ([ 'jpg', 'jpeg', 'gif', 'tiff', 'bmp', 'png'].includes(conversionType)) {
+    // Determine the appropriate action based on the conversion type
+    if (['csv', 'jpg', 'jpeg', 'gif', 'tiff', 'bmp', 'png'].includes(conversionType)) {
         form.action = '/convert_image';
     } else {
         form.action = '/convert';
     }
 
+    // Initialize a timeout to display the loading symbol after 5 seconds
     let loadingTimeout = setTimeout(() => {
         document.getElementById('loadingSymbol').style.display = 'block';
         // Disable UI components to prevent further interactions
         document.getElementById('fileInput').disabled = true;
         document.getElementById('conversionType').disabled = true;
         document.querySelector('button[type="submit"]').disabled = true;
-    }, 250);
+    }, 500);
 
     fetch(form.action, {
         method: 'POST',
         body: formData,
     })
     .then(response => {
-        clearTimeout(loadingTimeout);
+        clearTimeout(loadingTimeout); // Clear the timeout if the response is faster than 5 seconds
         if (!response.ok) {
             return response.json().then(error => Promise.reject(error));
         }
@@ -90,7 +95,8 @@ function submitFileForConversion(formData) {
         displayError(error.error || 'An error occurred during file conversion.');
     })
     .finally(() => {
-        clearTimeout(loadingTimeout);
+        clearTimeout(loadingTimeout); // Ensure the timeout is cleared to prevent it from running late
+        // Re-enable UI components and hide loading symbol regardless of the outcome
         document.getElementById('loadingSymbol').style.display = 'none';
         document.getElementById('fileInput').disabled = false;
         document.getElementById('conversionType').disabled = false;
