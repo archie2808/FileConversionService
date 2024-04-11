@@ -2,231 +2,25 @@
 2024-04-09 13:26:56,264 - __main__ - DEBUG - scan_result: {scan_result}
 2024-04-09 13:39:18,332 - __main__ - DEBUG - Validating file: TESTINGDOC.txt
 2024-04-09 13:39:18,344 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 15:03:36,566 - __main__ - DEBUG - Validating file: ArchieGledhillCV.rtf
-2024-04-09 15:03:36,575 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 15:03:36,866 - __main__ - ERROR - Conversion failed: Traceback (most recent call last):
+2024-04-09 17:21:53,973 - __main__ - DEBUG - Validating file: Reportp1.docx
+2024-04-09 17:21:53,997 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-09 17:23:28,251 - __main__ - DEBUG - Validating file: ArchieGledhillCV.pdf
+2024-04-09 17:23:28,256 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-09 17:23:33,155 - __main__ - DEBUG - Validating file: ArchieGledhillCV.pdf
+2024-04-09 17:23:33,158 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-09 17:23:42,689 - __main__ - DEBUG - Validating file: Reportp1.docx
+2024-04-09 17:23:42,715 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-09 17:23:48,618 - __main__ - DEBUG - Validating file: Reportp1.docx
+2024-04-09 17:23:48,642 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-09 17:29:42,885 - __main__ - DEBUG - Validating file: largefile.docx
+2024-04-09 17:29:44,390 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-09 17:30:43,671 - __main__ - DEBUG - Validating file: ArchieGledhillCV_2.docx
+2024-04-09 17:30:43,846 - __main__ - DEBUG - scan_result: {scan_result}
+2024-04-09 17:31:40,096 - converter_logic.docx_to_pdf_converter - ERROR - Expected PDF file was not created.
+2024-04-09 17:31:40,104 - __main__ - ERROR - Conversion failed: Traceback (most recent call last):
   File "/Users/ag/PycharmProjects/FileConversionServiceX/app.py", line 46, in convert_file
     converter.convert(output_stream)
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 27, in convert
-    raise e
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 18, in convert
-    subprocess.run(command, check=True, shell=True)
-  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command 'unrtf --text /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpemrof4ld.rtf > /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpemrof4ld.rtf.txt' returned non-zero exit status 1.
+  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/docx_to_pdf_converter.py", line 31, in convert
+    raise FileNotFoundError("Expected PDF file was not created.")
+FileNotFoundError: Expected PDF file was not created.
 
-2024-04-09 15:05:31,898 - __main__ - DEBUG - Validating file: ArchieGledhillCV.rtf
-2024-04-09 15:05:31,901 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 15:05:32,156 - __main__ - ERROR - Conversion failed: Traceback (most recent call last):
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/app.py", line 46, in convert_file
-    converter.convert(output_stream)
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 27, in convert
-    raise e
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 18, in convert
-    subprocess.run(command, check=True, shell=True)
-  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command 'unrtf --text /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpc6qcojv4.rtf > /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpc6qcojv4.rtf.txt' returned non-zero exit status 10.
-
-2024-04-09 15:34:52,476 - __main__ - DEBUG - Validating file: ArchieGledhillCV_1.rtf
-2024-04-09 15:34:52,484 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 15:34:52,517 - __main__ - ERROR - Conversion failed: Traceback (most recent call last):
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/app.py", line 46, in convert_file
-    converter.convert(output_stream)
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 27, in convert
-    raise e
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 18, in convert
-    subprocess.run(command, check=True, shell=True)
-  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command 'unrtf --text /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpkspgu_yg.rtf > /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpkspgu_yg.rtf.txt' returned non-zero exit status 10.
-
-2024-04-09 16:38:44,896 - __main__ - DEBUG - Validating file: newTest.rtf
-2024-04-09 16:38:44,902 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:38:44,925 - converter_logic.rtf_to_txt_converter - ERROR - An error occurred during RTF to TXT conversion: Error (line 0): Cannot open input file
-
-2024-04-09 16:38:44,929 - __main__ - ERROR - Conversion failed: Traceback (most recent call last):
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 25, in convert
-    result = subprocess.run(command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command '['unrtf', '--text', '/var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpeyn1jkg0.rtf']' returned non-zero exit status 10.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/app.py", line 46, in convert_file
-    converter.convert(output_stream)
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 42, in convert
-    raise RuntimeError("RTF to TXT conversion failed") from e
-RuntimeError: RTF to TXT conversion failed
-
-2024-04-09 16:41:53,028 - __main__ - DEBUG - Validating file: newTest.rtf
-2024-04-09 16:41:53,031 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:41:53,052 - converter_logic.rtf_to_txt_converter - ERROR - An error occurred during RTF to TXT conversion: Error (line 0): Cannot open input file
-
-2024-04-09 16:41:53,053 - __main__ - ERROR - Conversion failed: Traceback (most recent call last):
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 25, in convert
-    result = subprocess.run(command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command '['unrtf', '--text', '/var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp4aja_56q.rtf']' returned non-zero exit status 10.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/app.py", line 46, in convert_file
-    converter.convert(output_stream)
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 42, in convert
-    raise RuntimeError("RTF to TXT conversion failed") from e
-RuntimeError: RTF to TXT conversion failed
-
-2024-04-09 16:42:04,308 - __main__ - DEBUG - Validating file: another_test_1.rtf
-2024-04-09 16:42:04,309 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:42:04,329 - converter_logic.rtf_to_txt_converter - ERROR - An error occurred during RTF to TXT conversion: Error (line 0): Cannot open input file
-
-2024-04-09 16:42:04,330 - __main__ - ERROR - Conversion failed: Traceback (most recent call last):
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 25, in convert
-    result = subprocess.run(command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command '['unrtf', '--text', '/var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp8d6fbjlg.rtf']' returned non-zero exit status 10.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/app.py", line 46, in convert_file
-    converter.convert(output_stream)
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 42, in convert
-    raise RuntimeError("RTF to TXT conversion failed") from e
-RuntimeError: RTF to TXT conversion failed
-
-2024-04-09 16:45:12,378 - __main__ - DEBUG - Validating file: newTest.rtf
-2024-04-09 16:45:12,382 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:45:12,404 - converter_logic.rtf_to_txt_converter - ERROR - An error occurred during RTF to TXT conversion: Error (line 0): Cannot open input file
-
-2024-04-09 16:45:12,406 - __main__ - ERROR - Conversion failed: Traceback (most recent call last):
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 25, in convert
-    result = subprocess.run(command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command '['unrtf', '--text', '/var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp88vvpwkq.rtf']' returned non-zero exit status 10.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/app.py", line 46, in convert_file
-    converter.convert(output_stream)
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 42, in convert
-    raise RuntimeError("RTF to TXT conversion failed") from e
-RuntimeError: RTF to TXT conversion failed
-
-2024-04-09 16:50:28,418 - __main__ - DEBUG - Validating file: newTest.rtf
-2024-04-09 16:50:28,421 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:50:50,890 - __main__ - DEBUG - Validating file: newTest.rtf
-2024-04-09 16:50:50,893 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:50:50,914 - converter_logic.rtf_to_txt_converter - ERROR - An error occurred during RTF to TXT conversion: Error (line 0): Cannot open input file
-
-2024-04-09 16:50:50,917 - __main__ - ERROR - Conversion failed: Traceback (most recent call last):
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 25, in convert
-    result = subprocess.run(command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command '['unrtf', '--text', '/var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpe915m1pj.rtf']' returned non-zero exit status 10.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/app.py", line 46, in convert_file
-    converter.convert(output_stream)
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 42, in convert
-    raise RuntimeError("RTF to TXT conversion failed") from e
-RuntimeError: RTF to TXT conversion failed
-
-2024-04-09 16:51:40,105 - __main__ - DEBUG - Validating file: newTest.rtf
-2024-04-09 16:51:40,107 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:52:10,418 - __main__ - DEBUG - Validating file: ArchieGledhillCV_1.rtf
-2024-04-09 16:52:10,421 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:53:10,196 - __main__ - DEBUG - Validating file: ArchieGledhillCV_1.rtf
-2024-04-09 16:53:10,197 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:53:10,279 - __main__ - DEBUG - Validating file: ArchieGledhillCV_1.rtf
-2024-04-09 16:53:10,282 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:53:14,112 - __main__ - DEBUG - Validating file: ArchieGledhillCV_1.rtf
-2024-04-09 16:53:14,115 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:53:14,142 - __main__ - ERROR - Conversion failed: Traceback (most recent call last):
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/app.py", line 46, in convert_file
-    converter.convert(output_stream)
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 27, in convert
-    with open(temp_txt_path, 'rb') as temp_txt_file:
-         ^^^^^^^^^^^^^^^^^^^^^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: '/var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpkdzfe0uh.rtf.txt'
-
-2024-04-09 16:53:23,760 - __main__ - DEBUG - Validating file: ArchieGledhillCV_1.rtf
-2024-04-09 16:53:23,762 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:53:24,851 - __main__ - DEBUG - Validating file: ArchieGledhillCV_1.rtf
-2024-04-09 16:53:24,854 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:53:25,946 - __main__ - DEBUG - Validating file: ArchieGledhillCV_1.rtf
-2024-04-09 16:53:25,948 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:53:28,153 - __main__ - DEBUG - Validating file: ArchieGledhillCV_1.rtf
-2024-04-09 16:53:28,156 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:55:46,735 - __main__ - DEBUG - Validating file: output.txt
-2024-04-09 16:55:46,737 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:56:14,304 - __main__ - DEBUG - Validating file: newTest.txt
-2024-04-09 16:56:14,307 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:56:43,445 - __main__ - DEBUG - Validating file: Reportp1.docx
-2024-04-09 16:56:43,468 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:56:43,484 - converter_logic.docx_to_rtf_converter - DEBUG - Created temporary directory: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpubl40suf
-2024-04-09 16:56:43,485 - converter_logic.docx_to_rtf_converter - DEBUG - Temporary paths set for input: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpubl40suf/document.docx and output: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpubl40suf/document.rtf
-2024-04-09 16:56:43,488 - converter_logic.docx_to_rtf_converter - DEBUG - Wrote input stream to temporary file
-2024-04-09 16:56:43,488 - converter_logic.docx_to_rtf_converter - DEBUG - Executing command: pandoc -s /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpubl40suf/document.docx -o /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmpubl40suf/document.rtf
-2024-04-09 16:56:46,867 - converter_logic.docx_to_rtf_converter - DEBUG - Pandoc conversion executed successfully
-2024-04-09 16:56:46,869 - converter_logic.docx_to_rtf_converter - DEBUG - Read converted RTF content back into the output stream
-2024-04-09 16:57:12,009 - __main__ - DEBUG - Validating file: ArchieGledhillCV.pdf
-2024-04-09 16:57:12,072 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:58:03,110 - __main__ - DEBUG - Validating file: ArchieGledhillCV.pdf
-2024-04-09 16:58:03,113 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:58:04,661 - __main__ - DEBUG - Validating file: ArchieGledhillCV.pdf
-2024-04-09 16:58:04,665 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:58:43,796 - __main__ - DEBUG - Validating file: ArchieGledhillCV.pdf
-2024-04-09 16:58:43,799 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 16:58:45,688 - __main__ - DEBUG - Validating file: ArchieGledhillCV.pdf
-2024-04-09 16:58:45,691 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 17:00:56,161 - __main__ - DEBUG - Validating file: ArchieGledhillCV.pdf
-2024-04-09 17:00:56,164 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 18:39:17,611 - __main__ - DEBUG - Validating file: ArchieGledhillCV_2.docx
-2024-04-09 18:39:17,616 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 18:39:17,625 - converter_logic.docx_to_rtf_converter - DEBUG - Created temporary directory: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp7f_8hat8
-2024-04-09 18:39:17,625 - converter_logic.docx_to_rtf_converter - DEBUG - Temporary paths set for input: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp7f_8hat8/document.docx and output: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp7f_8hat8/document.rtf
-2024-04-09 18:39:17,625 - converter_logic.docx_to_rtf_converter - DEBUG - Wrote input stream to temporary file
-2024-04-09 18:39:17,626 - converter_logic.docx_to_rtf_converter - DEBUG - Executing command: pandoc -s /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp7f_8hat8/document.docx -o /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmp7f_8hat8/document.rtf
-2024-04-09 18:39:17,951 - converter_logic.docx_to_rtf_converter - DEBUG - Pandoc conversion executed successfully
-2024-04-09 18:39:17,951 - converter_logic.docx_to_rtf_converter - DEBUG - Read converted RTF content back into the output stream
-2024-04-09 18:39:21,184 - __main__ - DEBUG - Validating file: ArchieGledhillCV_2.docx
-2024-04-09 18:39:21,187 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 18:39:36,246 - __main__ - DEBUG - Validating file: Reportp1_4.pdf
-2024-04-09 18:39:38,032 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 18:42:29,548 - __main__ - DEBUG - Validating file: TESTINGDOC_1.rtf
-2024-04-09 18:42:29,554 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 18:42:29,564 - __main__ - ERROR - Conversion failed: Traceback (most recent call last):
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/app.py", line 46, in convert_file
-    converter.convert(output_stream)
-  File "/Users/ag/PycharmProjects/FileConversionServiceX/converter_logic/rtf_to_txt_converter.py", line 7, in convert
-    raise NotImplemented
-TypeError: exceptions must derive from BaseException
-
-2024-04-09 18:44:13,388 - __main__ - DEBUG - Validating file: TESTINGDOC_1.rtf
-2024-04-09 18:44:13,390 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 18:44:19,065 - __main__ - DEBUG - Validating file: TESTINGDOC_1.rtf
-2024-04-09 18:44:19,068 - __main__ - DEBUG - scan_result: {scan_result}
-2024-04-09 18:44:19,076 - converter_logic.rtf_to_docx_converter - INFO - Temporary RTF path: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmprfxwxqg9/input.rtf
-2024-04-09 18:44:19,076 - converter_logic.rtf_to_docx_converter - INFO - Temporary DOCX path: /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmprfxwxqg9/input.docx
-2024-04-09 18:44:19,076 - converter_logic.rtf_to_docx_converter - INFO - Written RTF content to temporary file
-2024-04-09 18:44:19,076 - converter_logic.rtf_to_docx_converter - INFO - Executing command: /Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to docx --outdir /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmprfxwxqg9 /var/folders/fh/ydk8l4t16ws2w9f2fctf7k_h0000gn/T/tmprfxwxqg9/input.rtf
-2024-04-09 18:44:20,163 - converter_logic.rtf_to_docx_converter - INFO - Conversion command executed successfully
-2024-04-09 18:44:36,656 - __main__ - DEBUG - Validating file: Reportp1_4.pdf
-2024-04-09 18:44:36,666 - __main__ - DEBUG - scan_result: {scan_result}
