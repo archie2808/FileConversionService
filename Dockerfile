@@ -25,6 +25,7 @@ RUN pip install -r requirements.txt
 COPY . /app
 
 # Set environment variables
+ENV FLASK_SECRET_KEY='the_most_secret_of_keys'
 ENV FLASK_ENV=production
 ENV GUNICORN_CMD_ARGS="--access-logfile - --error-logfile -"
 ENV CLAMAV_UPDATE_FREQ=24
@@ -37,4 +38,4 @@ EXPOSE 5000
 ENV FLASK_APP=FileConversionService:app
 
 # Run
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "FileConversionService:app"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]

@@ -8,7 +8,7 @@ import utility
 import os
 
 app = Flask(__name__)
-app.secret_key = 'secret_key'
+app.secret_key = os.getenv('FLASK_SECRET_KEY', 'the_most_secret_of_keys')
 
 logger = configure_logger(__name__)
 
@@ -133,5 +133,5 @@ def validate_file():
 
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+#if __name__ == '__main__':
+ #   app.run(debug=True)
