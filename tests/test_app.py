@@ -91,6 +91,7 @@ def test_txt_to_docx_conversion(client):
     assert response.status_code == 200
     assert 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' in response.content_type
 
+
 def test_txt_to_docx_content_verification(client):
     """
     Test verifying the content of the converted DOCX file.

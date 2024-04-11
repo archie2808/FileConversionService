@@ -25,8 +25,6 @@ def index():
     return render_template("Index.html")
 
 
-
-
 @app.route('/convert', methods=['POST'])
 def convert_file():
     """
