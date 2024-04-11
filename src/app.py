@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 import utility
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../templates', static_folder='../static')
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'the_most_secret_of_keys')
 
 logger = configure_logger(__name__)
@@ -134,4 +134,4 @@ def validate_file():
 
 
 #if __name__ == '__main__':
- #   app.run(debug=True)
+ #  app.run(debug=True)

@@ -1,7 +1,7 @@
 from PIL import Image
 from io import BytesIO
-from base_converter import BaseConverter
-from logger_config import configure_logger
+from src.base_converter import BaseConverter
+from src.logger_config import configure_logger
 
 logger = configure_logger(__name__)
 
@@ -37,7 +37,7 @@ class DynamicImageConverter(BaseConverter):
         """
 
         image = Image.open(self.input_stream)
-        logger.debug(f"image mode: {image}")
+        logger.info(f"image mode: {image}")
 
         # Handle transparency for formats that don't support it
         if self.target_format == 'jpeg' and (image.mode in ('RGBA', 'LA') or ('transparency' in image.info)):

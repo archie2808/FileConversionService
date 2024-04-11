@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./App
+      dockerfile: Dockerfile
+    volumes:
+      - clamav_data:/var/lib/clamav
+    depends_on:
+      - clamav
+
+
+  clamav:
+    image: custom-clamav:latest
+    volumes:
+       - clamav_logs:/var/log/clamav/clamd.log
+       - clamav_db:/var/log/clamav
+       - clamav_socket:/var/run/clamav/clamd.ctl
+
+
+volumes:
+  clamav_logs:
+    driver: local
+  clamav_db:
+    driver: local

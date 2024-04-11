@@ -9,3 +9,4 @@ Werkzeug~=3.0.1
 pyClamd~=0.4.0
 Werkzeug~=3.0.1
 pyClamd~=0.4.0
+python-json-logger~=2.0.7

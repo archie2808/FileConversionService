@@ -2,7 +2,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
-from base_converter import BaseConverter
+from src.base_converter import BaseConverter
 from io import BytesIO
 
 class TXTtoPDFConverter(BaseConverter):

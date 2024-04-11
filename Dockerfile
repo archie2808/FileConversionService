@@ -8,8 +8,6 @@ WORKDIR /src
 RUN apt-get update && apt-get install -y \
     libreoffice \
     unrtf \
-    clamav \
-    clamav-daemon \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the requirements file into the container
@@ -35,7 +33,7 @@ ENV LIBREOFFICE_PATH=/usr/bin/libreoffice
 EXPOSE 5000
 
 # Define environment variable for Gunicorn to find the Flask app
-ENV FLASK_APP=FileConversionService:app
+ENV FLASK_APP=app:app
 
 # Run
 CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]

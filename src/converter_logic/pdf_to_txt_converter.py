@@ -1,6 +1,6 @@
 from io import BytesIO
 import fitz
-from base_converter import BaseConverter
+from src.base_converter import BaseConverter
 
 
 class PDFToTXTConverter(BaseConverter):

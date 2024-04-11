@@ -13,7 +13,6 @@ def configure_logger(name):
 
           Parameters:
               name (str): The name of the logger. Typically, this would be the name of the module or component.
-              log_file (str, optional): The path to the log file where log messages will be written. Defaults to 'app.log'.
 
           Returns:
               logging.Logger: A configured logger instance that writes messages to both the specified log file
@@ -23,7 +22,6 @@ def configure_logger(name):
           Example:
               >> logger = configure_logger(__name__)
               >> logger.info("This is an info message.")
-              # This message will be written to 'app.log' and printed to the console.
           """
     logger = logging.getLogger(name)
     log_level = os.getenv('LOG_LEVEL', 'DEBUG').upper()

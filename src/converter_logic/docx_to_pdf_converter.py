@@ -2,9 +2,9 @@ import tempfile
 import subprocess
 import os
 from io import BytesIO
-from logger_config import configure_logger
-from base_converter import BaseConverter
-from utility import libreoffice_path
+from src.logger_config import configure_logger
+from src.base_converter import BaseConverter
+from src.utility import libreoffice_path
 
 logger = configure_logger(__name__)
 

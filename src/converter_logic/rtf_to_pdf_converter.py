@@ -1,10 +1,10 @@
-from base_converter import BaseConverter
+from src.base_converter import BaseConverter
 from io import BytesIO
 import os
 import tempfile
-from utility import libreoffice_path
+from src.utility import libreoffice_path
 import subprocess
-from logger_config import configure_logger
+from src.logger_config import configure_logger
 
 logger = configure_logger(__name__)
 

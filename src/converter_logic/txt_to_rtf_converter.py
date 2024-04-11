@@ -1,5 +1,5 @@
 from io import BytesIO
-from base_converter import BaseConverter
+from src.base_converter import BaseConverter
 
 
 class TXTtoRTFConverter(BaseConverter):

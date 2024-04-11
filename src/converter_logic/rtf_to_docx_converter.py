@@ -1,8 +1,8 @@
 from io import BytesIO
-from base_converter import BaseConverter
+from src.base_converter import BaseConverter
 import subprocess
-from utility import libreoffice_path
-from logger_config import configure_logger
+from src.utility import libreoffice_path
+from src.logger_config import configure_logger
 import tempfile
 import os
 
