@@ -1,26 +1,31 @@
-version: '3.8'
 
 services:
   app:
     build:
-      context: ./App
+      context: .
       dockerfile: Dockerfile
+    ports:
+      - "5001:5000"
     volumes:
-      - clamav_data:/var/lib/clamav
+      - ./data:/app/data
     depends_on:
       - clamav
-
+    networks:
+      - app-network
 
   clamav:
-    image: custom-clamav:latest
+    image: clamav/clamav-debian:1.2
+    ports:
+      - "3310:3310"
     volumes:
-       - clamav_logs:/var/log/clamav/clamd.log
-       - clamav_db:/var/log/clamav
-       - clamav_socket:/var/run/clamav/clamd.ctl
-
+      - clamav_data:/var/lib/clamav
+    networks:
+      - app-network
 
 volumes:
-  clamav_logs:
+  clamav_data:
     driver: local
-  clamav_db:
-    driver: local
+
+networks:
+  app-network:
+    driver: bridge

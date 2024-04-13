@@ -59,7 +59,7 @@ RUN apt update && apt install -y \
           -DENABLE_EXAMPLES=OFF \
           -DENABLE_JSON_SHARED=ON \
           -DENABLE_MAN_PAGES=OFF \
-          -DENABLE_MILTER=ON \
+          -DENABLE_MILTER=OFF \
           -DENABLE_STATIC_LIB=OFF \
     && \
     make DESTDIR="/clamav" -j$(($(nproc) - 1)) install \
@@ -85,7 +85,6 @@ RUN apt update && apt install -y \
         -e "s|^\#\(ScriptedUpdates\).*|\1 yes|" \
         "/clamav/etc/clamav/freshclam.conf.sample" > "/clamav/etc/clamav/freshclam.conf" && \
     sed -e "s|^\(Example\)|\# \1|" \
-        -e "s|.*\(PidFile\) .*|\1 /tmp/clamav-milter.pid|" \
         -e "s|.*\(MilterSocket\) .*|\1 inet:7357|" \
         -e "s|.*\(User\) .*|\1 clamav|" \
         -e "s|^\#\(LogFile\) .*|\1 /var/log/clamav/milter.log|" \
@@ -129,7 +128,7 @@ COPY --from=builder "/clamav" "/"
 
 COPY "./scripts/clamdcheck.sh" "/usr/local/bin/"
 COPY "./scripts/docker-entrypoint.sh" "/init"
-COPY "./scripts/docker-entrypoint-unprivileged.sh" "/init-unprivileged"
+
 
 HEALTHCHECK --start-period=6m CMD clamdcheck.sh
 

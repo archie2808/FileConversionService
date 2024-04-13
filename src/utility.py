@@ -1,5 +1,8 @@
 import os
 import pyclamd
+from logger_config import configure_logger
+
+logger = configure_logger(__name__)
 
 """
 Utility module for file conversion service.
@@ -34,6 +37,8 @@ image_mime_types = {
 }
 
 
+import pyclamd
+
 def scan_file_with_clamav(file_path):
     """
     Scans a file for malware using ClamAV.
@@ -49,15 +54,19 @@ def scan_file_with_clamav(file_path):
         dict: The scan result if malware is detected or an error occurs.
         None: If the file is clean or no malware is detected.
     """
-    cd = pyclamd.ClamdUnixSocket('/tmp/clamd.socket')
+    # Update to use ClamdNetworkSocket for TCP connection
+    cd = pyclamd.ClamdNetworkSocket('clamav', 3310)
 
     try:
         scan_result = cd.scan_file(file_path)
         if scan_result:
-            return scan_result
+
+            for key, value in scan_result.items():
+                return {key: value}
     except Exception as e:
-        print(f"An error occurred during ClamAV scan: {e}")
-        return {'error': 'Failed to scan the file'}
+        logger.debug(f"An error occurred during ClamAV scan: {e}")
+        return {'error': 'Failed to scan the file', 'details': str(e)}
 
     # Return None if the file is clean
     return None
+

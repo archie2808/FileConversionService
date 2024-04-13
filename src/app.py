@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 import utility
 import os
 
-app = Flask(__name__, template_folder='../templates', static_folder='../static')
+app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'the_most_secret_of_keys')
 
 logger = configure_logger(__name__)
@@ -107,29 +107,33 @@ def validate_file():
            jsonify: Returns a JSON object indicating the file is valid and safe, or
            containing an error if the file is found to be malicious or if the scan fails.
        """
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file part'}), 400
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({'error': 'No selected file'}), 400
+    try:
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file part'}), 400
+        file = request.files['file']
+        if file.filename == '':
+            return jsonify({'error': 'No selected file'}), 400
 
-    # Ensure the filename is secure
-    filename = secure_filename(file.filename)
-    logger.debug(f"Validating file: {filename}")
-    temp_path = os.path.join('/tmp', filename)
-    file.save(temp_path)
+        # Ensure the filename is secure
+        filename = secure_filename(file.filename)
+        logger.info(f"Validating file: {filename}")
+        temp_path = os.path.join('/tmp', filename)
+        file.save(temp_path)
 
-    # Perform the ClamAV file scan
-    scan_result = utility.scan_file_with_clamav(temp_path)
-    logger.debug("scan_result: {scan_result}")
+        # Perform the ClamAV file scan
+        scan_result = utility.scan_file_with_clamav(temp_path)
+        logger.debug("scan_result: {scan_result}")
 
-    os.remove(temp_path)
+        os.remove(temp_path)
 
-    if scan_result is not None:
-        # If malware is detected, return an error
-        return jsonify({'error': 'Malicious file detected', 'details': scan_result}), 400
-    else:
-        return jsonify({'message': 'File is valid and safe to process'}), 200
+        if scan_result is not None:
+            # If malware is detected, return an error
+            return jsonify({'error': 'Malicious file detected', 'details': scan_result}), 400
+        else:
+            return jsonify({'message': 'File is valid and safe to process'}), 200
+    except Exception as e:
+        logger.error(f"An error occurred during file validation: {e}")
+        return jsonify({'error': 'Failed to validate the file:' + str(e)}), 500
 
 
 
