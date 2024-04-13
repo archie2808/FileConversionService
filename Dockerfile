@@ -29,7 +29,7 @@ ENV LIBREOFFICE_PATH=/usr/bin/libreoffice
 EXPOSE 5000
 
 # Define environment variable for Gunicorn to find the Flask app
-ENV FLASK_APP=main:app  #Adjust this line according to your actual main file and app variable
+ENV FLASK_APP=main:app
 
 # Run the Gunicorn server
 CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "main:app"]  # Adjust this line accordingly
