@@ -1,11 +1,12 @@
-from io import BytesIO
-from src.base_converter import BaseConverter
-import tempfile
-import subprocess
 import os
-import src.logger_config
+import subprocess
+import tempfile
+from io import BytesIO
 
-logger = src.logger_config.configure_logger(__name__)
+from ..logger_config import configure_logger
+from ..base_converter import BaseConverter
+
+logger = configure_logger(__name__)
 
 class DocxToRTFConverter(BaseConverter):
     """

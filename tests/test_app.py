@@ -1,7 +1,5 @@
 import io
-import os
-import fitz #PyMuPDF
-from app import app
+from src.app import app
 import pytest
 import docx
 

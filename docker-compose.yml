@@ -4,10 +4,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+       TMPDIR: /var/tmp
     ports:
       - "5001:5000"
     volumes:
+      - .:/workdir
       - ./data:/app/data
+      - shared_tmp:/var/tmp
     depends_on:
       - clamav
     networks:
@@ -15,15 +19,21 @@ services:
 
   clamav:
     image: clamav/clamav-debian:1.2
+    environment:
+       TMPDIR: /var/tmp
+       CLAMAV_UPDATE_ENABLED: "true"
     ports:
       - "3310:3310"
     volumes:
       - clamav_data:/var/lib/clamav
+      - shared_tmp:/var/tmp
     networks:
       - app-network
 
 volumes:
   clamav_data:
+    driver: local
+  shared_tmp:
     driver: local
 
 networks:

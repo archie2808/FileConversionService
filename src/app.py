@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, jsonify, send_file
-from io import BytesIO, FileIO
-import traceback
-from logger_config import configure_logger
-from converter_factory import ConverterFactory
-from werkzeug.utils import secure_filename
-import utility
 import os
+import traceback
+from io import BytesIO
+from . import utility
+from . converter_factory import ConverterFactory
+from flask import Flask, render_template, request, jsonify, send_file
+from . logger_config import configure_logger
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'the_most_secret_of_keys')
@@ -117,13 +117,15 @@ def validate_file():
         # Ensure the filename is secure
         filename = secure_filename(file.filename)
         logger.info(f"Validating file: {filename}")
-        temp_path = os.path.join('/tmp', filename)
+
+        # Use the configured TMPDIR for temporary file storage
+        temp_path = os.path.join(os.getenv('TMPDIR', '/tmp'), filename)
         file.save(temp_path)
 
         # Perform the ClamAV file scan
         scan_result = utility.scan_file_with_clamav(temp_path)
-        logger.debug("scan_result: {scan_result}")
 
+        # Clean up the temporary file
         os.remove(temp_path)
 
         if scan_result is not None:
@@ -133,9 +135,8 @@ def validate_file():
             return jsonify({'message': 'File is valid and safe to process'}), 200
     except Exception as e:
         logger.error(f"An error occurred during file validation: {e}")
-        return jsonify({'error': 'Failed to validate the file:' + str(e)}), 500
+        return jsonify({'error': 'Failed to validate the file: ' + str(e)}), 500
 
 
 
-#if __name__ == '__main__':
- #  app.run(debug=True)
+

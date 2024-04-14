@@ -1,8 +1,10 @@
-from io import BytesIO
 import tempfile
+from io import BytesIO
+
 from pdf2docx import Converter
-from src.logger_config import configure_logger
-from src.base_converter import BaseConverter
+
+from ..base_converter import BaseConverter
+from ..logger_config import configure_logger
 
 logger = configure_logger(__name__)
 

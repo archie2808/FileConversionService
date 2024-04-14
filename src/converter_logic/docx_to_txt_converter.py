@@ -1,6 +1,8 @@
 from io import BytesIO
-from src.base_converter import BaseConverter
+
 import docx
+
+from ..base_converter import BaseConverter
 
 
 class DOCXtoTXTConverter(BaseConverter):

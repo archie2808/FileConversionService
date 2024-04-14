@@ -1,7 +1,8 @@
 from io import BytesIO
-from src.base_converter import BaseConverter
+
 import fitz
-import io
+
+from ..base_converter import BaseConverter
 
 
 class PDFToRTFConverter(BaseConverter):

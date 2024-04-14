@@ -1,6 +1,8 @@
-import pandas as pd
 from io import BytesIO
-from src.base_converter import BaseConverter
+
+import pandas as pd
+
+from ..base_converter import BaseConverter
 
 
 class CSVtoXLSXConverter(BaseConverter):

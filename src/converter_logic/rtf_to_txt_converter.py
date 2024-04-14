@@ -2,11 +2,11 @@
 import subprocess
 import tempfile
 from io import BytesIO
-from src.base_converter import BaseConverter
-import src.logger_config
 
+from ..logger_config import configure_logger
+from ..base_converter import BaseConverter
 
-logger = src.logger_config.configure_logger(__name__)
+logger = configure_logger(__name__)
 
 
 class RTFToTXTConverter(BaseConverter):

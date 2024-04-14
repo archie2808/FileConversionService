@@ -1,7 +1,9 @@
-from PIL import Image
 from io import BytesIO
-from src.base_converter import BaseConverter
-from src.logger_config import configure_logger
+
+from PIL import Image
+
+from ..base_converter import BaseConverter
+from ..logger_config import configure_logger
 
 logger = configure_logger(__name__)
 
