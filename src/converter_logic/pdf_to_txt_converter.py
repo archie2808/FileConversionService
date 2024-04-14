@@ -1,7 +1,5 @@
 from io import BytesIO
-
 import fitz
-
 from ..base_converter import BaseConverter
 
 

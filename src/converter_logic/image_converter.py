@@ -1,7 +1,5 @@
 from io import BytesIO
-
 from PIL import Image
-
 from ..base_converter import BaseConverter
 from ..logger_config import configure_logger
 

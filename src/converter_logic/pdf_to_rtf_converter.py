@@ -1,7 +1,5 @@
 from io import BytesIO
-
 import fitz
-
 from ..base_converter import BaseConverter
 
 
@@ -29,10 +27,7 @@ class PDFToRTFConverter(BaseConverter):
 
         rtf_text += "}"
 
-
         output_stream.write(rtf_text.encode('utf-8'))
-
-
         output_stream.seek(0)
 
         return output_stream

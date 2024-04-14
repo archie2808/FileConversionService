@@ -1,7 +1,5 @@
 from io import BytesIO
-
 import docx
-
 from ..base_converter import BaseConverter
 
 

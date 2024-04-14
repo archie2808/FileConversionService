@@ -1,7 +1,7 @@
 import os
 
 from . logger_config import configure_logger
-
+import pyclamd
 logger = configure_logger(__name__)
 
 """
@@ -36,8 +36,6 @@ image_mime_types = {
     'bmp': 'image/bmp'
 }
 
-
-import pyclamd
 
 def scan_file_with_clamav(file_path):
     """

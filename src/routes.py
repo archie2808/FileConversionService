@@ -3,17 +3,18 @@ import traceback
 from io import BytesIO
 from . import utility
 from . converter_factory import ConverterFactory
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, render_template, request, jsonify, send_file, Blueprint
 from . logger_config import configure_logger
 from werkzeug.utils import secure_filename
 
-app = Flask(__name__)
-app.secret_key = os.getenv('FLASK_SECRET_KEY', 'the_most_secret_of_keys')
 
 logger = configure_logger(__name__)
+main = Blueprint('main', __name__)
 
 
-@app.route('/')
+
+
+@main.route('/')
 def index():
     """
     Renders the main page of the file conversion service.
@@ -25,7 +26,7 @@ def index():
     return render_template("Index.html")
 
 
-@app.route('/convert', methods=['POST'])
+@main.route('/convert', methods=['POST'])
 def convert_file():
     """
     Handles file conversion requests. Validates the request form and file,
@@ -64,7 +65,7 @@ def convert_file():
         return jsonify({'error': 'Conversion failed'}), 500
 
 
-@app.route('/convert_image', methods=['POST'])
+@main.route('/convert_image', methods=['POST'])
 def convert_image():
     """
         Handles image conversion requests specifically. Similar to convert_file, but
@@ -96,7 +97,7 @@ def convert_image():
         return jsonify({'error': 'Conversion failed: ' + str(e)}), 500
 
 
-@app.route('/validate_file', methods=['POST'])
+@main.route('/validate_file', methods=['POST'])
 def validate_file():
     """
        Validates the uploaded file for presence and non-emptiness, then performs

@@ -8,6 +8,7 @@ WORKDIR /workdir
 RUN apt-get update && apt-get install -y \
     libreoffice \
     unrtf \
+    pandoc \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the requirements file into the container at the root of /app
@@ -27,7 +28,7 @@ ENV LIBREOFFICE_PATH=/usr/bin/libreoffice
 ENV PYTHONPATH=/src
 ENV TMPDIR /var/tmp
 # Define environment variable for Gunicorn to find the Flask app
-ENV FLASK_APP=app/src/app.py
+ENV FLASK_APP=app/src/app_factory.py
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
@@ -38,4 +39,4 @@ RUN mkdir -p $TMPDIR
 
 
 # Run the Gunicorn server
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "src.app:app"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "src.app_factory:create_app()"]

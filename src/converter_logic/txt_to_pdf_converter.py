@@ -1,10 +1,8 @@
 from io import BytesIO
-
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Paragraph
-
 from ..base_converter import BaseConverter
 
 

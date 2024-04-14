@@ -1,7 +1,5 @@
 from io import BytesIO
-
 import pandas as pd
-
 from ..base_converter import BaseConverter
 
 

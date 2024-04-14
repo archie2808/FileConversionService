@@ -2,7 +2,6 @@ import os
 import subprocess
 import tempfile
 from io import BytesIO
-
 from ..logger_config import configure_logger
 from ..base_converter import BaseConverter
 
@@ -64,4 +63,4 @@ class DocxToRTFConverter(BaseConverter):
             raise RuntimeError("Conversion failed: Pandoc encountered an error.") from e
         except Exception as e:
             logger.exception("An unexpected error occurred during the conversion process.")
-            raise RuntimeError("An unexpected error occurred.") from e
+            raise RuntimeError("An unexpected error occurred." + str(e))
