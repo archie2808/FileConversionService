@@ -2,33 +2,38 @@ pipeline {
     agent any
 
     stages {
-        stage('Preparation') {
+        stage('Setup Environment') {
             steps {
                 git branch: 'Production',
                     url: 'https://github.com/archie2808/FileConversionService.git'
+                echo 'Setting up Docker environment...'
+                sh 'docker-compose -f docker-compose.yml up -d --build'
             }
         }
-        stage('Check Environment') {
+        stage('Test') {
             steps {
-                script {
-                    sh 'docker --version'
-                    sh 'docker-compose --version'
+                // Retry only the test command, not the environment setup
+                retry(3) {
+                    script {
+                        // Add a sleep time before running tests to allow all services to initialize properly
+                        sleep(time: 15, unit: 'SECONDS')
+                        sh 'exec python -m unittest discover -s test_dependencies -v'
+                    }
                 }
             }
         }
-        stage('Build and Test') {
+        stage('Teardown Environment') {
             steps {
-                script {
-                    sh 'docker-compose -f docker-compose.yml up -d --build'
-                    sh 'docker-compose -f docker-compose.yml exec app python -m unittest discover -s tests'
-                }
+                echo 'Tearing down Docker environment...'
+                sh 'docker-compose -f docker-compose.yml down'
             }
         }
     }
     post {
         always {
             script {
-                sh 'docker-compose -f docker-compose.yml down'
+                echo 'Cleaning up any remaining resources...'
+                sh 'docker-compose -f docker-compose.yml down --volumes'
             }
         }
     }

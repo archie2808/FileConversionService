@@ -11,13 +11,13 @@ RUN apt-get update && apt-get install -y \
     pandoc \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy the requirements file into the container at the root of /app
+# Copy the requirements file into the container at the root of /workdir
 COPY requirements.txt .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 
-# Copy the entire project contents into the container at /app
+# Copy the entire project contents into the container at /workdir
 COPY / . /workdir/
 
 # Set environment variables

@@ -10,7 +10,6 @@ services:
       - "5001:5000"
     volumes:
       - .:/workdir
-      - ./data:/app/data
       - shared_tmp:/var/tmp
     depends_on:
       - clamav
