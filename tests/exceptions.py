@@ -8,7 +8,7 @@ from src.utility import scan_file_with_clamav
 
 class TestApp(unittest.TestCase):
     def setUp(self):
-        self.app = create_app(testing=True)  # Configure your Flask app for testing
+        self.app = create_app(testing=True)
         self.client = self.app.test_client()
 
     def test_index(self):
