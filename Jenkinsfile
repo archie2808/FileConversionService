@@ -7,16 +7,18 @@ pipeline {
                 git branch: 'Production',
                     url: 'https://github.com/archie2808/FileConversionService.git'
                 echo 'Setting up Docker environment...'
+                sh 'echo $PATH'
                 sh 'docker-compose -f docker-compose.yml up -d --build'
             }
         }
         stage('Test') {
             steps {
-                // Retry only the test command, not the environment setup
+                // Retry only the test command
                 retry(3) {
                     script {
                         // Add a sleep time before running tests to allow all services to initialize properly
                         sleep(time: 15, unit: 'SECONDS')
+
                         sh 'exec python -m unittest discover -s test_dependencies -v'
                     }
                 }
