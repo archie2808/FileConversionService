@@ -16,9 +16,9 @@ pipeline {
                 retry(3) {
                     script {
                         // Add a sleep time before running tests to allow all services to initialize properly
+                        sleep(time: 15, unit: 'SECONDS')
 
-
-                        sh 'exec /Library/Frameworks/Python.framework/Versions/3.12/bin/python3 -m unittest discover -s  tests -p "test_*.py" -v'
+                         sh 'docker-compose exec app python -m unittest discover -s tests'
                     }
                 }
             }
