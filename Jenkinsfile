@@ -18,7 +18,7 @@ pipeline {
                         // Add a sleep time before running tests to allow all services to initialize properly
 
 
-                        sh 'exec /Library/Frameworks/Python.framework/Versions/3.12/bin/python3 -m unittest discover -s test_dependencies.py -v'
+                        sh 'exec /Library/Frameworks/Python.framework/Versions/3.12/bin/python3 -m unittest discover -s  tests -p "test_*.py" -v'
                     }
                 }
             }
