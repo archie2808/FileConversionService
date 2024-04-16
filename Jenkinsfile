@@ -7,12 +7,6 @@ pipeline {
                 git branch: 'Production',
                     url: 'https://github.com/archie2808/FileConversionService.git'
                 echo 'Setting up Docker environment...'
-                sh 'echo $PATH'
-                sh '''
-                    echo "Checking operating system details..."
-                    uname -a  # Print all system information
-                    cat /etc/os-release  # This works on most Linux distros
-                    '''
                 sh 'docker-compose -f docker-compose.yml up -d --build'
             }
         }
