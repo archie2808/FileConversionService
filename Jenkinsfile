@@ -19,7 +19,7 @@ pipeline {
                         // Add a sleep time before running tests to allow all services to initialize properly
                         sleep(time: 15, unit: 'SECONDS')
 
-                        sh 'exec python -m unittest discover -s test_dependencies -v'
+                        sh 'exec /Applications/Python 3.12 -m unittest discover -s test_dependencies -v'
                     }
                 }
             }
