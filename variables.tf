@@ -2,6 +2,7 @@
 variable "vpc_id" {
   description = "The ID of the VPC where the EKS cluster will be deployed."
   type        = string
+  default = "vpc-05a6869946d549a07"
 }
 
 variable "subnets" {
