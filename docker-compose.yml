@@ -29,6 +29,16 @@ services:
     networks:
       - app-network
 
+  webhook-handler:
+    build: ./webhook-handler
+    ports:
+      - 5002:5002
+    volumes:
+      - .:/workdir
+    environment:
+      FLASK_APP: webhook-handler.py
+
+
 volumes:
   clamav_data:
     driver: local
