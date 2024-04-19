@@ -1,5 +1,0 @@
-#ignore build specific directories to speed up docker build image and security
-venv/
-.git/
-.idea/
-__pycache__
