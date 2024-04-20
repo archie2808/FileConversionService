@@ -2,9 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Setup Environment') {
+        stage('Checkout SCM') {
             steps {
-
+                echo 'Checking out source code from GitHub...'
+                   git branch: 'Production',
+                    url: 'https://github.com/archie2808/FileConversionService.git'
                 echo 'Starting Docker environment setup...'
                 sh 'docker-compose -f docker-compose.yml up -d --build'
                 echo 'Docker environment setup complete..'
@@ -28,13 +30,13 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            script {
-                echo 'Cleaning up any remaining resources...'
-                sh 'docker-compose -f docker-compose.yml down --volumes'
-                echo 'Cleanup complete.'
-            }
+        post {
+            always {
+                script {
+                    echo 'Cleaning up any remaining resources...'
+                    sh 'docker-compose -f docker-compose.yml down --volumes'
+                    echo 'Cleanup complete.'
+                }
         }
     }
 }
