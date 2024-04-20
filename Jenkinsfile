@@ -2,6 +2,13 @@ pipeline {
     agent any
 
     stages {
+
+        stage('Clean Workspace') {
+            steps {
+                deleteDir()  // This will clear the workspace
+                    checkout scm // Re-checkout the code
+                }
+        }
         stage('Checkout SCM') {
             steps {
                 echo 'Checking out source code from GitHub...'
