@@ -1,6 +1,8 @@
 
 services:
   app:
+    mem_limit: 4g
+    cpus: 0.5
     build:
       context: .
       dockerfile: Dockerfile
@@ -8,9 +10,6 @@ services:
        TMPDIR: /var/tmp
     ports:
       - "5001:5000"
-    resources:
-      cpus: 0.5
-      memory: 4G
     volumes:
       - .:/workdir
       - shared_tmp:/var/tmp
