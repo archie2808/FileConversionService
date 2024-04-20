@@ -69,11 +69,11 @@ def convert_file():
 def convert_image():
     """
         Handles image conversion requests specifically. Similar to convert_file, but
-        optimized for image files. Uses a different set of MIME types.
+        optimized for image files. Uses a different set of MIME types..
 
         Returns:
             send_file: Sends the converted image file as an attachment if successful.
-            jsonify: Returns a JSON object with an error message if the conversion fails or if validation fails.
+            jsonify: Returns a JSON object with an error message if the conversion fails or if validation fails..
         """
     file = request.files['file']
     target_format = request.form['target_format'].lower()

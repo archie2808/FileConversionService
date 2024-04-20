@@ -42,7 +42,7 @@ def scan_file_with_clamav(file_path):
     Scans a file for malware using ClamAV.
 
     This function interfaces with a running ClamAV daemon to scan a specified file for malware.
-    If malware is detected, the scan result is returned; otherwise, None is returned, indicating
+    If malware is detected, the scan resgult is returned; otherwise, None is returned, indicating
     the file is clean. If an error occurs during the scan, an error dictionary is returned.
 
     Parameters:

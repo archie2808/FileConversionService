@@ -11,7 +11,7 @@ pipeline {
                 ])
                 echo 'Starting Docker environment setup...'
                 sh 'docker-compose -f docker-compose.yml up -d --build'
-                echo 'Docker environment setup complete.'
+                echo 'Docker environment setup complete..'
             }
         }
         stage('Test') {
