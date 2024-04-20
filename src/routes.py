@@ -1,12 +1,13 @@
 import os
 import traceback
 from io import BytesIO
-from . import utility
-from . converter_factory import ConverterFactory
-from flask import Flask, render_template, request, jsonify, send_file, Blueprint
-from . logger_config import configure_logger
+
+from flask import render_template, request, jsonify, send_file, Blueprint
 from werkzeug.utils import secure_filename
 
+from . import utility
+from .converter_factory import ConverterFactory
+from .logger_config import configure_logger
 
 logger = configure_logger(__name__)
 main = Blueprint('main', __name__)

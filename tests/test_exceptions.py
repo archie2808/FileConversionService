@@ -1,10 +1,9 @@
 import unittest
-from flask import Flask, jsonify, request
 from io import BytesIO
 from unittest.mock import patch
+
 from src.app_factory import create_app
-from src.converter_factory import ConverterFactory
-from src.utility import scan_file_with_clamav
+
 
 class TestApp(unittest.TestCase):
     def setUp(self):
