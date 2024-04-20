@@ -54,7 +54,7 @@ def scan_file_with_clamav(file_path):
     """
     # Update to use ClamdUnixSocket for a local connection
     try:
-        cd = pyclamd.ClamdUnixSocket(path='/var/run/clamav/clamd.ctl')
+        cd = pyclamd.ClamdUnixSocket('/var/run/clamav/clamd.ctl')
         scan_result = cd.scan_file(file_path)
         if scan_result:
             for key, value in scan_result.items():
