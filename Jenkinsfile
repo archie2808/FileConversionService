@@ -7,7 +7,7 @@ pipeline {
                 checkout([
                     $class: 'GitSCM',
                     branches: [[name: '*/Production']],
-                    userRemoteConfigs: [[url: 'https://github.com/archie2808/FileConversionService.git']]
+                    userRemoteConfigs: [[url: 'https://github.com/archie2808/FileConversionService']]
                 ])
                 echo 'Starting Docker environment setup...'
                 sh 'docker-compose -f docker-compose.yml up -d --build'
