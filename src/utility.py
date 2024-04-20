@@ -52,17 +52,15 @@ def scan_file_with_clamav(file_path):
         dict: The scan result if malware is detected or an error occurs.
         None: If the file is clean or no malware is detected.
     """
-    # Update to use ClamdNetworkSocket for TCP connection
-    cd = pyclamd.ClamdNetworkSocket('clamav', 3310)
-
+    # Update to use ClamdUnixSocket for a local connection
     try:
+        cd = pyclamd.ClamdUnixSocket(path='/var/run/clamav/clamd.ctl')
         scan_result = cd.scan_file(file_path)
         if scan_result:
-
             for key, value in scan_result.items():
                 return {key: value}
     except Exception as e:
-        logger.debug(f"An error occurred during ClamAV scan: {e}")
+        logger.error(f"An error occurred during ClamAV scan: {e}")
         return {'error': 'Failed to scan the file', 'details': str(e)}
 
     # Return None if the file is clean
