@@ -4,22 +4,23 @@ pipeline {
     stages {
         stage('Setup Environment') {
             steps {
-                git branch: 'Production',
-                    url: 'https://github.com/archie2808/FileConversionService.git'
-                echo 'Setting up Docker environment...'
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/Production']],
+                    userRemoteConfigs: [[url: 'https://github.com/archie2808/FileConversionService.git']]
+                ])
+                echo 'Starting Docker environment setup...'
                 sh 'docker-compose -f docker-compose.yml up -d --build'
+                echo 'Docker environment setup complete.'
             }
         }
         stage('Test') {
             steps {
-                // Retry only the test command
                 retry(3) {
-                    script {
-                        // Add a sleep time before running tests to allow all services to initialize properly
-                        sleep(time: 15, unit: 'SECONDS')
-
-                         sh 'docker-compose exec app python -m unittest discover -s tests'
-                    }
+                    echo 'Starting tests after a brief delay to allow for environment initialization...'
+                    sleep(time: 15, unit: 'SECONDS')
+                    sh 'docker-compose exec app python -m unittest discover -s tests'
+                    echo 'Tests execution completed.'
                 }
             }
         }
@@ -27,6 +28,7 @@ pipeline {
             steps {
                 echo 'Tearing down Docker environment...'
                 sh 'docker-compose -f docker-compose.yml down'
+                echo 'Docker environment teardown complete.'
             }
         }
     }
@@ -35,6 +37,7 @@ pipeline {
             script {
                 echo 'Cleaning up any remaining resources...'
                 sh 'docker-compose -f docker-compose.yml down --volumes'
+                echo 'Cleanup complete.'
             }
         }
     }
