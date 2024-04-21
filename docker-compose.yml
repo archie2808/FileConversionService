@@ -1,4 +1,6 @@
 
+version: '3.8'
+
 services:
   app:
     mem_limit: 4g
@@ -7,7 +9,7 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-       TMPDIR: /var/tmp
+      TMPDIR: /var/tmp
     ports:
       - "5001:5000"
     volumes:
@@ -21,8 +23,8 @@ services:
   clamav:
     image: clamav/clamav-debian:1.2
     environment:
-       TMPDIR: /var/tmp
-       CLAMAV_UPDATE_ENABLED: "true"
+      TMPDIR: /var/tmp
+      CLAMAV_UPDATE_ENABLED: "true"
     ports:
       - "3310:3310"
     volumes:
@@ -30,6 +32,18 @@ services:
       - shared_tmp:/var/tmp
     networks:
       - app-network
+
+  glances:
+    image: nicolargo/glances:latest
+    container_name: glances
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    network_mode: "host"
+    environment:
+      - GLANCES_OPT=-w -p 61209
+      - GLANCES_OPT_ARG=--disable-plugin docker
 
 volumes:
   clamav_data:
