@@ -13,7 +13,6 @@ services:
     ports:
       - "5001:5000"
     volumes:
-      - .:/workdir
       - shared_tmp:/var/tmp
     depends_on:
       - clamav
@@ -32,18 +31,6 @@ services:
       - shared_tmp:/var/tmp
     networks:
       - app-network
-
-  glances:
-    image: nicolargo/glances:latest
-    container_name: glances
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-    network_mode: "host"
-    environment:
-      - GLANCES_OPT=-w -p 61209
-      - GLANCES_OPT_ARG=--disable-plugin docker
 
 volumes:
   clamav_data:

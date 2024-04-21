@@ -1,5 +1,5 @@
 # Use python runtime as parent image
-FROM python:3.12-bullseye
+FROM python:3.12
 
 # Set the working directory in the container to /app
 WORKDIR /workdir
@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     libreoffice \
     unrtf \
     pandoc \
+    nmon \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the requirements file into the container at the root of /workdir
