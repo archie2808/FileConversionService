@@ -28,7 +28,7 @@ class WebsiteUser(HttpUser):
             print(f"File not found: {file_path}")
 
     def save_file(self, response, file_name):
-        directory = os.path.abspath("/loadtest")  # Get the absolute path
+        directory = os.path.abspath("loadtest")  # Get the absolute path
         if not os.path.exists(directory):
             os.makedirs(directory)
 
@@ -36,7 +36,7 @@ class WebsiteUser(HttpUser):
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         unique_file_name = f"{file_name}_{timestamp}"
 
-        # Create the full path with the unique file name
+        
         file_path = os.path.join(directory, unique_file_name)
 
         with open(file_path, 'wb') as f:
