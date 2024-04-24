@@ -33,7 +33,7 @@ ENV FLASK_APP=app/src/app_factory.py
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
-
+EXPOSE 8089
 
 # Ensure the directory exists
 RUN mkdir -p $TMPDIR
