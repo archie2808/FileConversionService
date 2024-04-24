@@ -17,7 +17,7 @@ class WebsiteUser(HttpUser):
 
     @task(5)
     def convert_txt_to_pdf(self):
-        file_path = "testfile1.txt"  # Update this to the path of your sample text file
+        file_path = "testfile1.txt"
         if os.path.exists(file_path):
             with open(file_path, "rb") as file:
                 files = {'file': file}
