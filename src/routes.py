@@ -73,7 +73,7 @@ def convert_image():
 
         Returns:
             send_file: Sends the converted image file as an attachment if successful.
-            jsonify: Returns a JSON object with an error message if the conversion fails or if validation fails..
+            jsonify: Returns a JSON object with an error message if the conversion fails or if validation fails
         """
     file = request.files['file']
     target_format = request.form['target_format'].lower()
