@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     libreoffice \
     unrtf \
     pandoc \
+    nmon \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the requirements file into the container at the root of /workdir
@@ -32,11 +33,13 @@ ENV FLASK_APP=app/src/app_factory.py
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
-
+EXPOSE 8089
 
 # Ensure the directory exists
 RUN mkdir -p $TMPDIR
 
 
 # Run the Gunicorn server
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "src.app_factory:create_app()"]
+CMD ["gunicorn", "-w", "18", "-b", "0.0.0.0:5000", "src.app_factory:create_app()"]
+
+#nmon -f -s 3 -c 200

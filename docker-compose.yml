@@ -10,9 +10,10 @@ services:
       TMPDIR: /var/tmp
     ports:
       - "5001:5000"
+      - "8089:8089"
     volumes:
-      - .:/workdir
       - shared_tmp:/var/tmp
+      - .:/workdir
     depends_on:
       - clamav
     networks:
