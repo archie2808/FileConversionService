@@ -1,5 +1,5 @@
 # Use python runtime as parent image
-FROM python:3.12
+FROM python:3.12-bullseye
 
 # Set the working directory in the container to /app
 WORKDIR /workdir
@@ -41,3 +41,5 @@ RUN mkdir -p $TMPDIR
 
 # Run the Gunicorn server
 CMD ["gunicorn", "-w", "18", "-b", "0.0.0.0:5000", "src.app_factory:create_app()"]
+
+#nmon -f -s 3 -c 200
