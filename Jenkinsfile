@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    environment {
+        GIT_EXECUTABLE = "/opt/homebrew/Cellar/git/2.44.0/bin/git"
+    }
     stages {
 
        stage('Prepare Workspace and Checkout Code') {
@@ -25,7 +27,7 @@ pipeline {
         stage('Teardown Environment') {
             steps {
                 echo 'Tearing down Docker environment...'
-                sh 'docker-compose -f docker-compose.yml down'
+                sh 'docker-compose docker-compose.yml down'
                 echo 'Docker environment teardown complete.'
             }
         }
@@ -34,7 +36,7 @@ pipeline {
             always {
                 script {
                     echo 'Cleaning up any remaining resources...'
-                    sh 'docker-compose -f docker-compose.yml down --volumes'
+                    sh 'docker-compose docker-compose.yml down --volumes'
                     echo 'Cleanup complete.'
                 }
         }
