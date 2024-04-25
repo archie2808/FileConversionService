@@ -7,6 +7,7 @@ pipeline {
     stages {
         stage('Prepare Workspace and Checkout Code') {
             steps {
+                echo 'Preparing workspace...'
                 sh 'whoami'
                 sh 'echo $PATH'
                 sh 'docker-compose version'
