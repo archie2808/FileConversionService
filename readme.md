@@ -4,7 +4,7 @@ Then run the following command in the terminal:
 This will build and deploy the converter and the file scanning service on docker.
 The converter will be available at http://localhost:5000
 
-To conduct load testing load testing on the container, either navigate to the terminal 
+To conduct load testing on the container, either navigate to the terminal 
 inside the docker application or run the following command in the terminal:
 ```docker exec -it <container_name_or_id> /bin/sh```
 Then: 
