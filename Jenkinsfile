@@ -3,22 +3,15 @@ pipeline {
 
     stages {
 
-        stage('Clean Workspace') {
-            steps {
-                deleteDir()  // This will clear the workspace
-                    checkout scm // Re-checkout the code
-                }
-        }
-        stage('Checkout SCM') {
-            steps {
-                echo 'Checking out source code from GitHub...'
-                   git branch: 'Production',
-                    url: 'https://github.com/archie2808/FileConversionService.git'
-                echo 'Starting Docker environment setup...'
-                sh 'docker-compose -f docker-compose.yml up -d --build'
-                echo 'Docker environment setup complete..'
-            }
-        }
+       stage('Prepare Workspace and Checkout Code') {
+    steps {
+        deleteDir()  // This clears the workspace
+        checkout scm // This re-checkouts the code from the current SCM configuration
+        echo 'Checking out source code from GitHub...'
+        git branch: 'PipelineTesting',
+            url: 'https://github.com/archie2808/FileConversionService.git'
+    }
+}
         stage('Test') {
             steps {
                 retry(3) {
