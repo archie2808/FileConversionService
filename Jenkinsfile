@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Build and Start Docker Containers') {
             steps {
-                sh 'docker-compose -f docker-compose.yml up -d --build'
+                sh 'docker-compose -f docker-compose.yml up -d '
             }
         }
         stage('Test') {
