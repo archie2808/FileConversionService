@@ -5,8 +5,8 @@ pipeline {
 
        stage('Prepare Workspace and Checkout Code') {
     steps {
-        deleteDir()  // This clears the workspace
-        checkout scm // This re-checkouts the code from the current SCM configuration
+        deleteDir()
+        checkout scm
         echo 'Checking out source code from GitHub...'
         git branch: 'PipelineTesting',
             url: 'https://github.com/archie2808/FileConversionService.git'
