@@ -1,0 +1,222 @@
+
+
+**TESTFILE**
+
+Started by user admin
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/root/.jenkins/workspace/FCS
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Preparation)
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/root/.jenkins/workspace/FCS/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/archie2808/FileConversionService.git # timeout=10
+Fetching upstream changes from https://github.com/archie2808/FileConversionService.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.3 (Apple Git-146)'
+ > git fetch --tags --force --progress -- https://github.com/archie2808/FileConversionService.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/Production^{commit} # timeout=10
+Checking out Revision 58e2d10ad654279f7d9d2ca09b1f7ac4d647e4ff (refs/remotes/origin/Production)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 58e2d10ad654279f7d9d2ca09b1f7ac4d647e4ff # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D Production # timeout=10
+ > git checkout -b Production 58e2d10ad654279f7d9d2ca09b1f7ac4d647e4ff # timeout=10
+Commit message: "setting up ci/cd"
+ > git rev-list --no-walk 58e2d10ad654279f7d9d2ca09b1f7ac4d647e4ff # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Check Environment)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ docker info
+Client:
+ Version:    26.0.0
+ Context:    desktop-linux
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.13.1-desktop.1
+    Path:     /Users/ag/.docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.26.1-desktop.1
+    Path:     /Users/ag/.docker/cli-plugins/docker-compose
+  debug: Get a shell into any image or container. (Docker Inc.)
+    Version:  0.0.27
+    Path:     /Users/ag/.docker/cli-plugins/docker-debug
+  dev: Docker Dev Environments (Docker Inc.)
+    Version:  v0.1.2
+    Path:     /Users/ag/.docker/cli-plugins/docker-dev
+  extension: Manages Docker extensions (Docker Inc.)
+    Version:  v0.2.23
+    Path:     /Users/ag/.docker/cli-plugins/docker-extension
+  feedback: Provide feedback, right in your terminal! (Docker Inc.)
+    Version:  v1.0.4
+    Path:     /Users/ag/.docker/cli-plugins/docker-feedback
+  init: Creates Docker-related starter files for your project (Docker Inc.)
+    Version:  v1.1.0
+    Path:     /Users/ag/.docker/cli-plugins/docker-init
+  sbom: View the packaged-based Software Bill Of Materials (SBOM) for an image (Anchore Inc.)
+    Version:  0.6.0
+    Path:     /Users/ag/.docker/cli-plugins/docker-sbom
+  scout: Docker Scout (Docker Inc.)
+    Version:  v1.6.3
+    Path:     /Users/ag/.docker/cli-plugins/docker-scout
+
+Server:
+ Containers: 0
+  Running: 0
+  Paused: 0
+  Stopped: 0
+ Images: 11
+ Server Version: 26.0.0
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Using metacopy: false
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: cgroupfs
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: ae07eda36dd25f8a1b98dfbf587313b99c0190bb
+ runc version: v1.1.12-0-g51d5e94
+ init version: de40ad0
+ Security Options:
+  seccomp
+   Profile: unconfined
+  cgroupns
+ Kernel Version: 6.6.22-linuxkit
+ Operating System: Docker Desktop
+ OSType: linux
+ Architecture: aarch64
+ CPUs: 12
+ Total Memory: 7.657GiB
+ Name: docker-desktop
+ ID: eb0dc0dd-6cb4-4579-ab5e-fc8088f4b273
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ HTTP Proxy: http.docker.internal:3128
+ HTTPS Proxy: http.docker.internal:3128
+ No Proxy: hubproxy.docker.internal
+ Labels:
+  com.docker.desktop.address=unix:///Users/ag/Library/Containers/com.docker.docker/Data/docker-cli.sock
+ Experimental: false
+ Insecure Registries:
+  hubproxy.docker.internal:5555
+  127.0.0.0/8
+ Live Restore Enabled: false
+
+WARNING: daemon is not using the default seccomp profile
+[Pipeline] sh
++ docker --version
+Docker version 26.0.0, build 2ae903e
+[Pipeline] sh
++ docker-compose --version
+Docker Compose version v2.26.1-desktop.1
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build and Test)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ docker-compose -f docker-compose.yml up -d --build
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [app internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.18kB done
+#1 DONE 0.0s
+
+#2 [app internal] load metadata for docker.io/library/python:3.12-bullseye
+#2 DONE 0.0s
+
+#3 [app internal] load .dockerignore
+#3 transferring context: 149B done
+#3 DONE 0.0s
+
+#4 [app 1/7] FROM docker.io/library/python:3.12-bullseye
+#4 DONE 0.0s
+
+#5 [app internal] load build context
+#5 transferring context: 1.81kB done
+#5 DONE 0.0s
+
+#6 [app 4/7] COPY requirements.txt .
+#6 CACHED
+
+#7 [app 6/7] COPY / . /workdir/
+#7 CACHED
+
+#8 [app 2/7] WORKDIR /workdir
+#8 CACHED
+
+#9 [app 3/7] RUN apt-get update && apt-get install -y     libreoffice     unrtf     pandoc     && rm -rf /var/lib/apt/lists/*
+#9 CACHED
+
+#10 [app 5/7] RUN pip install -r requirements.txt
+#10 CACHED
+
+#11 [app 7/7] RUN mkdir -p /var/tmp
+#11 CACHED
+
+#12 [app] exporting to image
+#12 exporting layers done
+#12 writing image sha256:085faadb0c081c010de499a6898ebab2ebbf9074a440dd2394af2aa8467fa49d done
+#12 naming to docker.io/library/fcs-app done
+#12 DONE 0.0s
+ Network fcs_app-network  Creating
+ Network fcs_app-network  Created
+ Container fcs-clamav-1  Creating
+ Container fcs-clamav-1  Created
+ Container fcs-app-1  Creating
+ Container fcs-app-1  Created
+ Container fcs-clamav-1  Starting
+ Container fcs-clamav-1  Started
+ Container fcs-app-1  Starting
+Error response from daemon: error while creating mount source path '/private/var/root/.jenkins/workspace/FCS': mkdir /private/var/root: permission denied
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ docker-compose -f docker-compose.yml down
+ Container fcs-app-1  Stopping
+ Container fcs-app-1  Stopped
+ Container fcs-app-1  Removing
+ Container fcs-app-1  Removed
+ Container fcs-clamav-1  Stopping
+ Container fcs-clamav-1  Stopped
+ Container fcs-clamav-1  Removing
+ Container fcs-clamav-1  Removed
+ Network fcs_app-network  Removing
+ Network fcs_app-network  Removed
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+ERROR: script returned exit code 1
+Finished: FAILURE
